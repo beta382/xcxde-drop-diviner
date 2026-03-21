@@ -1,4 +1,4 @@
-ID,EnemyID1,EnemyID2,EnemyID3,LvMin,LvMax
+id,enemyId1,enemyId2,enemyId3,lvMin,lvMax
 0,0,0,0,0,0
 1,3773,0,0,0,0
 2,3771,0,0,57,60

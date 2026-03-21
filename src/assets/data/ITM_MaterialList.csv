@@ -1,4 +1,4 @@
-ID,Name,Lot,LotParts,AddLotRevSilver,AddLotRevGold,Flag(Parts0),Flag(Parts1),Flag(Parts2),Flag(Parts3),Flag(Parts4),Flag(Parts5),Flag(Parts6),Flag(Parts7),Flag(Parts8),Flag(Parts9),Flag(Parts10)
+id,name,lot,lotParts,addLotRevSilver,addLotRevGold,flagParts0,flagParts1,flagParts2,flagParts3,flagParts4,flagParts5,flagParts6,flagParts7,flagParts8,flagParts9,flagParts10
 1,1,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0
 2,39,11,11,0,0,0,0,0,0,0,0,0,0,0,0,0
 3,74,25,25,5,15,1,0,0,0,0,0,0,0,0,0,0

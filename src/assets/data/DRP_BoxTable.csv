@@ -1,4 +1,4 @@
-ID,Name,PartsName,LotRank,Lock,GoldBox,SilverBox,BronzeBox
+id,name,partsName,lotRank,lock,goldBox,silverBox,bronzeBox
 1,"【本体】",1589,1,0,0,0,2
 2,arm_L,1505,1,0,0,0,2
 3,arm_R,1506,1,0,0,0,2

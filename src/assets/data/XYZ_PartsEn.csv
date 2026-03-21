@@ -1,4 +1,4 @@
-ID,File,PartsID,Name
+id,file,partsId,name
 1,en010201,1,arm_L
 2,en010201,2,arm_R
 3,en010201,3,head

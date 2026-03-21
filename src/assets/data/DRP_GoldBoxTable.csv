@@ -1,4 +1,4 @@
-ID,Lot_01,Item_01,Lot_02,Item_02,Lot_03,Item_03,Lot_04,Item_04,Lot_05,Item_05,Lot_06,Item_06,Lot_07,Item_07,Lot_08,Item_08,Lot_09,Item_09,Lot_10,Item_10,Lot_11,Item_11,Lot_12,Item_12
+id,lot1,item1,lot2,item2,lot3,item3,lot4,item4,lot5,item5,lot6,item6,lot7,item7,lot8,item8,lot9,item9,lot10,item10,lot11,item11,lot12,item12
 1,100,307,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 2,100,309,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 3,50,311,100,307,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
