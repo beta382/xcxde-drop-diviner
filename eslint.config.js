@@ -7,7 +7,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
-  globalIgnores(["dist"]),
+  globalIgnores(["coverage", "dist"]),
   {
     files: ["**/*.{ts,tsx}"],
     extends: [
@@ -33,6 +33,32 @@ export default defineConfig([
         "error",
         {
           patterns: [{ regex: "^@mui/[^/]+$" }],
+        },
+      ],
+      "@typescript-eslint/consistent-type-imports": "error",
+      "@typescript-eslint/no-restricted-types": [
+        "error",
+        {
+          types: {
+            Omit: {
+              message: "Use `Except` from `type-fest` instead",
+              fixWith: "Except",
+            },
+            Extract: {
+              message: "Use `ExtractStrict` from `type-fest` instead",
+              fixWith: "ExtractStrict",
+            },
+            Exclude: {
+              message: "Use `ExcludeStrict` from `type-fest` instead",
+              fixWith: "ExcludeStrict",
+            },
+          },
+        },
+      ],
+      "@typescript-eslint/no-unnecessary-condition": [
+        "error",
+        {
+          allowConstantLoopConditions: "only-allowed-literals",
         },
       ],
       "jsdoc/require-jsdoc": "off",

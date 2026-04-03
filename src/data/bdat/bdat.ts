@@ -1,6 +1,6 @@
 import { inferSchema, initParser } from "udsv";
 import * as csv from "~/data/bdat/bdat-csv-index";
-import * as bdatTypes from "~/data/bdat/bdat.types";
+import type * as bdatTypes from "~/data/bdat/bdat.types";
 
 function ingestBdat<T extends bdatTypes.BdatRow>(
   bdatCsvStr: string,

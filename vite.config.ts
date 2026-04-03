@@ -12,6 +12,16 @@ export default defineConfig({
     },
   },
   test: {
+    coverage: {
+      exclude: ["src/*.{ts,tsx}", "src/ui", "src/util/workers"],
+      include: ["src/**/*.{ts,tsx}"],
+      provider: "istanbul",
+      thresholds: {
+        branches: 92,
+        functions: 97,
+        statements: 97,
+      },
+    },
     globals: true,
   },
 });
