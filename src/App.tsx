@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { languages, muiLocales } from "~/common/languages";
 import { theme } from "~/theme";
+import { SettingsProvider } from "~/ui/common/contexts/settings/SettingsProvider";
 import "./App.css";
 
 export function App() {
@@ -21,7 +22,9 @@ export function App() {
 
   return (
     <ThemeProvider theme={themeWithLocale}>
-      <Content />
+      <SettingsProvider>
+        <Content />
+      </SettingsProvider>
     </ThemeProvider>
   );
 }
