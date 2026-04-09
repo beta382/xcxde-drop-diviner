@@ -1,0 +1,1 @@
+export const MAX_RNG_KEYFRAME_OFFSET = 1000;
