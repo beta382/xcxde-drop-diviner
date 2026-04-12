@@ -3,19 +3,22 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "dev-vm": "vite --host",
+    "build-wasm": "wasm-pack build ./wasm-rs --target web",
+    "test-wasm": "cargo test --manifest-path ./wasm-rs/Cargo.toml",
+    "dev": "npm run build-wasm && vite",
+    "dev-vm": "npm run build-wasm && vite --host",
     "lint": "eslint .",
-    "test": "vitest",
+    "test": "npm run test-wasm && vitest",
     "coverage": "vitest --coverage",
-    "build": "tsc -b && vite build",
+    "build": "npm run build-wasm && tsc -b && vite build",
     "preview": "vite preview",
     "preview-vm": "vite preview --host"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/material": "^7.3.9",
+    "@fontsource/roboto": "^5.2.10",
+    "@mui/material": "^9.0.0",
     "i18next": "^26.0.5",
     "i18next-browser-languagedetector": "^8.2.1",
     "i18next-hmr": "^3.2.0",
@@ -47,7 +50,16 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.57.0",
     "vite": "^8.0.7",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.0",
+    "wasm-pack": "^0.14.0"
+  },
+  "overridesComment": "https://github.com/wasm-bindgen/wasm-pack/issues/1522",
+  "overrides": {
+    "axios": "1.15.0",
+    "binary-install": {
+      "tar": "7.5.13",
+      "rimraf": "6.1.3"
+    }
   },
   "prettier": {
     "plugins": [

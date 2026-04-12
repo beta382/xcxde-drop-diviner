@@ -1,18 +1,45 @@
 import { createTheme } from "@mui/material/styles";
 
-const _theme = createTheme({
-  palette: {
-    mode: "dark",
-    tonalOffset: 0.1,
+export const theme = createTheme({
+  breakpoints: {
+    values: {
+      mobile: 0,
+      tablet: 750,
+      desktop: 1200,
+    },
   },
-});
-
-export const theme = createTheme(_theme, {
+  components: {
+    MuiIcon: {
+      defaultProps: {
+        baseClassName: "material-symbols-outlined",
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: "rgba(255, 255, 255, 0.8)",
+          "&.Mui-disabled": {
+            color: "rgba(255, 255, 255, 0.4)",
+          },
+        },
+      },
+    },
+    MuiTooltip: {
+      defaultProps: {
+        enterDelay: 300,
+        enterTouchDelay: 300,
+      },
+    },
+  },
   palette: {
     mode: "dark",
-    primary: _theme.palette.augmentColor({
-      color: { main: "#059C98", contrastText: "#000000" },
-      name: "primary",
-    }),
+    contrastThreshold: 3.5,
+    tonalOffset: 0.1,
+    background: {
+      default: "#121212",
+    },
+    primary: {
+      main: "#059C98",
+    },
   },
 });

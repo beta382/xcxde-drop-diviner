@@ -1,6 +1,7 @@
 import type { RequireExactlyOne } from "type-fest";
 import type { VoiceLanguage } from "~/common/languages";
 import type { DeconstructedMtRandView } from "~/ui/common/contexts/rng/mt-rand-view";
+import type { FindSeedControllerCommand } from "~/ui/common/workers/find-seed/find-seed.types";
 
 export type SettingsLatest = SettingsV1;
 export type SettingsUpdate = RequireExactlyOne<{
@@ -16,7 +17,7 @@ export interface SettingsV1 {
   playerVoiceLanguage: VoiceLanguage;
   "advanced.numThreads": number | "system";
   "advanced.allowManualSeedStateInput": boolean;
-  "advanced.seedFinder.workerType": "ts" | "wasm";
+  "advanced.seedFinder.workerType": FindSeedControllerCommand["workerType"];
   "advanced.seedFinder.switch1SystemTickRateHz": number;
   "advanced.seedFinder.switch2SystemTickRateHz": number;
   "advanced.seedFinder.userTimingAdjustmentMsHistory": number[];

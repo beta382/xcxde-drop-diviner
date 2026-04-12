@@ -1,13 +1,15 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import Stack from "@mui/material/Stack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { languages, muiLocales } from "~/common/languages";
 import { theme } from "~/theme";
+import { LockoutProvider } from "~/ui/common/contexts/lockout/LockoutProvider";
 import { RngProvider } from "~/ui/common/contexts/rng/RngProvider";
 import { SettingsProvider } from "~/ui/common/contexts/settings/SettingsProvider";
-import "./App.css";
+import { SeedStateFinder } from "~/ui/seed-state-finder/SeedStateFinder";
 
 export function App() {
   const [t, i18n] = useTranslation();
@@ -25,7 +27,10 @@ export function App() {
     <ThemeProvider theme={themeWithLocale}>
       <SettingsProvider>
         <RngProvider>
-          <Content />
+          <LockoutProvider>
+            <CssBaseline />
+            <Content />
+          </LockoutProvider>
         </RngProvider>
       </SettingsProvider>
     </ThemeProvider>
@@ -34,13 +39,19 @@ export function App() {
 
 function Content() {
   return (
-    <Box
-      minHeight="100dvh"
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-    >
-      <Button variant="contained">Make me a Spatha</Button>
-    </Box>
+    <Container maxWidth="desktop">
+      <Stack
+        spacing={3}
+        sx={{
+          minHeight: "100dvh",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 3,
+          marginBottom: 3,
+        }}
+      >
+        <SeedStateFinder />
+      </Stack>
+    </Container>
   );
 }

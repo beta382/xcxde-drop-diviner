@@ -7,7 +7,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
-  globalIgnores(["coverage", "dist"]),
+  globalIgnores(["coverage", "dist", "wasm-rs"]),
   {
     files: ["**/*.{ts,tsx}"],
     extends: [
@@ -61,6 +61,7 @@ export default defineConfig([
           allowConstantLoopConditions: "only-allowed-literals",
         },
       ],
+      "@typescript-eslint/strict-boolean-expressions": "error",
       "jsdoc/require-jsdoc": "off",
       "jsdoc/require-returns": ["error", { checkGetters: false }],
       "jsdoc/tag-lines": ["error", "any", { startLines: 1 }],

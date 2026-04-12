@@ -1,3 +1,224 @@
 {
-  "title": "XCX: DE - RNG Manipulation"
+  "title": "XCX: DE - Drop Diviner",
+  "common": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "searchFailed": "Not Found",
+    "listJoin": ",",
+    "shouldSpaceJoinedList": true,
+    "stringQuote": "\"{{str}}\"",
+    "seconds": "{{sec, number}}s"
+  },
+  "vas": {
+    "female": [
+      {
+        "name": "Heroic (Tara Platt)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "All right, lets do it",
+          "victory": "They never stood a chance",
+          "scout": "Shall we?",
+          "huh": "Huh?",
+          "greeting": "Hey!",
+          "stagger": "They staggered me!",
+          "topple": "Ouch, that hurt!"
+        }
+      },
+      {
+        "name": "Independent (Kira Buckland)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Here we go",
+          "victory": "Nice job",
+          "scout": "We're gonna do great",
+          "huh": "Huh?",
+          "greeting": "Hey there!",
+          "stagger": "So what if you staggered me?",
+          "topple": "That hurts you jerk!"
+        }
+      },
+      {
+        "name": "Mature (Mary Elizabeth McGlynn)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Shall we?",
+          "victory": "Success",
+          "scout": "It's a pleasure",
+          "huh": "Ugh!",
+          "greeting": "Hello",
+          "stagger": "I have lost my balance!",
+          "topple": "Augh! Ow!"
+        }
+      },
+      {
+        "name": "Peppy (Cristina Valenzuela)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Here goes!",
+          "victory": "We did great!",
+          "scout": "You're in good hands now!",
+          "huh": "Huh?!",
+          "greeting": "Whadaya say?",
+          "stagger": "Ugh, I hate losing my balance!",
+          "topple": "I didn't trip, they tripped me!"
+        }
+      },
+      {
+        "name": "Joker (Kate Higgins)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Let's murderate 'em!",
+          "victory": "We sure owned them!",
+          "scout": "Oh, all right",
+          "huh": "Wuh?!",
+          "greeting": "Hey hey!",
+          "stagger": "Uhh, I'm getting wobbly!",
+          "topple": "Oops! I fell!"
+        }
+      },
+      {
+        "name": "Classic (Carina Reeves)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Let's get on with it",
+          "victory": "Yay, We win!",
+          "scout": "Shall we then?",
+          "huh": "What?!",
+          "greeting": "Hello",
+          "stagger": "Ugh, I've lost my balance",
+          "topple": "How dare you trip me up?!"
+        }
+      },
+      {
+        "name": "Soldier (Erin Fitzgerald/Cat Protano)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Let's go",
+          "victory": "Huh. Is that it?",
+          "scout": "Just tell me what to do",
+          "huh": "Huh?",
+          "greeting": "Shall we?",
+          "stagger": "Ugh! I've been staggered!",
+          "topple": "Ow! Damn it!"
+        }
+      }
+    ],
+    "male": [
+      {
+        "name": "Heroic (Yuri Lowenthal)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Alright, it's on",
+          "victory": "Victory is ours!",
+          "scout": "Ready and willing!",
+          "huh": "Huh?",
+          "greeting": "Hey there",
+          "stagger": "They staggered me!",
+          "topple": "Ow, my footing"
+        }
+      },
+      {
+        "name": "Rookie (Bryce Papenbrook)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Come on!",
+          "victory": "We've still got a ways to go",
+          "scout": "I'll do what I can to help",
+          "huh": "Huh?",
+          "greeting": "Hey",
+          "stagger": "I'm off balance!",
+          "topple": "Ugh, toppled?!"
+        }
+      },
+      {
+        "name": "Rebel (Keith Silverstein)",
+        "voiceLines": {
+          "jump": "Ngh!",
+          "battle": "Let's get this started!",
+          "victory": "Easy peasy",
+          "scout": "Rock 'n roll",
+          "huh": "Uwagh",
+          "greeting": "Yo",
+          "stagger": "Oh! So you like knockin' people around",
+          "topple": "Hey, that hurt!"
+        }
+      },
+      {
+        "name": "Studious (Robbie Daymond)",
+        "voiceLines": {
+          "jump": "Euh!",
+          "battle": "Ready?",
+          "victory": "Game and set",
+          "scout": "We'll work well together, I'm sure",
+          "huh": "What?",
+          "greeting": "Greetings",
+          "stagger": "Hey!",
+          "topple": "That hurts!"
+        }
+      },
+      {
+        "name": "Joker (Ben Diskin)",
+        "voiceLines": {
+          "jump": "Yeuh!",
+          "battle": "Let's do this thing!",
+          "victory": "Woohoo, we did it!",
+          "scout": "It's nice to be wanted",
+          "huh": "Huh?",
+          "greeting": "Hey there",
+          "stagger": "I've been staggered!",
+          "topple": "Gah-ow, man down!"
+        }
+      },
+      {
+        "name": "Classic (Adam Howden)",
+        "voiceLines": {
+          "jump": "Hngh!",
+          "battle": "Right, let's do this!",
+          "victory": "Sorry, but it was you or us",
+          "scout": "Shall we?",
+          "huh": "Huh?",
+          "greeting": "Cheers",
+          "stagger": "They staggered me",
+          "topple": "Ughhh!"
+        }
+      },
+      {
+        "name": "Warrior (Dan Woren)",
+        "voiceLines": {
+          "jump": "Hm!",
+          "battle": "Here I come, sunshine",
+          "victory": "There's no substitute for real combat",
+          "scout": "Let's do this",
+          "huh": "Huh?",
+          "greeting": "Hey",
+          "stagger": "I'm off balance",
+          "topple": "A topple attack, clever"
+        }
+      }
+    ]
+  },
+  "seedStateFinder": {
+    "seedLabel": "Seed",
+    "discardSeedTooltip": "Discard Seed",
+    "discardSeedDialog": {
+      "title": "Warning!",
+      "body": "Are you sure you want to discard your seed?"
+    },
+    "stateLabel": "State",
+    "restoreStateTooltip": "Restore Previous State ({{prevState, number}})",
+    "prevStateButton": "Prev State",
+    "nextStateButton": "Next State",
+    "upcomingVoiceLinesLabel": "Upcoming Voice Lines",
+    "timerTooltip": "Tip: Aim for when you see the Nintendo logo, and when you press A to load your save file, but above all, be consistent. The tool will automatically adjust to your habits to improve the speed of future seed searches.",
+    "timerStartButton": "System Started",
+    "timerStopButton": "Save File Loaded",
+    "timerResetButton": "Reset Timer",
+    "inputVoiceLinesLabel": "Input Voice Lines",
+    "clearVoiceLinesButton": "Clear Voice Lines",
+    "restoreVoiceLinesButton": "Restore Voice Lines",
+    "undoVoiceLineButton": "Undo Voice Line",
+    "startSeedSearchButton": "Start Seed Search",
+    "startStateSearchButton": "Start State Search",
+    "statesAdvancedLabel": "+{{states, number}}"
+  }
 }
