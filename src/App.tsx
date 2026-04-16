@@ -9,6 +9,7 @@ import { theme } from "~/theme";
 import { LockoutProvider } from "~/ui/common/contexts/lockout/LockoutProvider";
 import { RngProvider } from "~/ui/common/contexts/rng/RngProvider";
 import { SettingsProvider } from "~/ui/common/contexts/settings/SettingsProvider";
+import { LootFinder } from "~/ui/loot-finder/LootFinder";
 import { SeedStateFinder } from "~/ui/seed-state-finder/SeedStateFinder";
 
 export function App() {
@@ -51,6 +52,7 @@ function Content() {
         }}
       >
         <SeedStateFinder />
+        <LootFinder />
       </Stack>
     </Container>
   );

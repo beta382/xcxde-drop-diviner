@@ -9,6 +9,15 @@ export const theme = createTheme({
     },
   },
   components: {
+    // Because we use custom breakpoints, and MUI internally uses the default
+    // breakpoints
+    MuiAutocomplete: {
+      styleOverrides: {
+        option: {
+          minHeight: "0!important",
+        },
+      },
+    },
     MuiIcon: {
       defaultProps: {
         baseClassName: "material-symbols-outlined",
@@ -21,6 +30,15 @@ export const theme = createTheme({
           "&.Mui-disabled": {
             color: "rgba(255, 255, 255, 0.4)",
           },
+        },
+      },
+    },
+    // Because we use custom breakpoints, and MUI internally uses the default
+    // breakpoints
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          minHeight: 0,
         },
       },
     },

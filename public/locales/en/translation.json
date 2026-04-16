@@ -3,6 +3,7 @@
   "common": {
     "confirm": "Confirm",
     "cancel": "Cancel",
+    "delete": "Delete",
     "searchFailed": "Not Found",
     "listJoin": ",",
     "shouldSpaceJoinedList": true,
@@ -220,5 +221,60 @@
     "startSeedSearchButton": "Start Seed Search",
     "startStateSearchButton": "Start State Search",
     "statesAdvancedLabel": "+{{states, number}}"
+  },
+  "lootFinder": {
+    "enemySearchLabel": "Enemy",
+    "detailedEnemyLabel": "{{enemyName}} (id: {{enemyId}})",
+    "enemyListTruncatedLabel": "Results truncated, type to filter",
+    "enemyLevelsLabel": "Level",
+    "enemyHeroicTaleLevelLabel": "{{level}}†",
+    "enemyAppendagesLabel": "Broken Appendage",
+    "enemyAppendageLabel": "{{gameName}} (id: {{debugName}})",
+    "enemyBodyOnlyAppendageLabel": "{{body}} only",
+    "classesTooltip": "You must not have any party members other than Cross.",
+    "classesLabel": "Cross Class",
+    "offset": {
+      "tabLabel": "Find Offset",
+      "historyLabel": "Offset History: ",
+      "emptyHistoryLabel": "None",
+      "multipleOffsetLabel": "({{offsets}})",
+      "multipleOffsetJoin": "/",
+      "clearStaleHistoryTooltip": "Discard Stale Offset History",
+      "clearHistoryTooltip": "Discard Offset History",
+      "clearEquipmentButton": "Clear Equipment Drops",
+      "startSearchButton": "Start Offset Search",
+      "numberHeading": "Equipment Drop #{{index}}",
+      "traitsLabel": "Trait #{{index}}",
+      "addTraitsLabel": "Add Trait #{{index}}",
+      "augmentsLabel": "Augment Slots"
+    },
+    "search": {
+      "tabLabel": "Search Equipment",
+      "clearEquipmentButton": "Clear Equipment Filters",
+      "startSearchButton": "Start Equipment Search",
+      "numberHeading": "Equipment Filter #{{index}}",
+      "traitsLabel": "Required Trait #{{index}}",
+      "addTraitsLabel": "Add Required Trait #{{index}}",
+      "augmentsLabel": "Minimum Augment Slots",
+      "statesLabel": "States: ",
+      "moreStatesLabel": "...",
+      "distanceLabel": "Distance: ",
+      "noDistanceLabel": "All passed, search again",
+      "awaitingSearchLabel": "Awaiting successful search",
+      "dropChanceLabel": "Drop Rate: 1 in {{rate, number}}",
+      "cannotDropLabel": "Undroppable"
+    },
+    "equipmentLabel": "Equipment",
+    "itemTypeGroups": {
+      "groundWeaponsMelee": "Ground Weapons (Melee)",
+      "groundWeaponsRanged": "Ground Weapons (Ranged)",
+      "groundArmors": "Ground Armors",
+      "skellWeapons": "Skell Weapons",
+      "skellArmors": "Skell Armors",
+      "augments": "Augments",
+      "materials": "Materials",
+      "other": "Other"
+    },
+    "endSearchButton": "End Search"
   }
 }

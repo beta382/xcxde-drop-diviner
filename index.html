@@ -11,15 +11,121 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
   <link rel="manifest" href="/favicon/site.webmanifest" />
 
+  <!-- Roboto font (for preload text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+  <!-- Material Symbols -->
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,24&icon_names=delete,info,undo&display=block" />
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,24&icon_names=delete,error,info,undo&display=block" />
+
+  <!-- https://github.com/mui/material-ui/issues/46891 -->
+  <style>
+    @supports (-webkit-appearance: none) {
+      .MuiOutlinedInput-notchedOutline legend {
+        visibility: visible !important;
+      }
+    }
+  </style>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <!-- set in code -->
   <title></title>
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <!-- While waiting for module downloads and BDAT parsing -->
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .container {
+        background-color: #121212;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 24px;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        height: 100dvh;
+      }
+
+      #loadingText {
+        color: #ffffff;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-weight: 300;
+        font-size: 3.75rem;
+        line-height: 1.2;
+        letter-spacing: -0.00833em;
+        text-align: center;
+      }
+
+      .spinnerRoot {
+        display: block;
+        width: 72px;
+        height: 72px;
+        animation: rotation 1.4s linear infinite;
+      }
+
+      .spinner {
+        stroke: #059c98;
+        stroke-dasharray: 80px, 200px;
+        stroke-dashoffset: 0;
+        transform-origin: 0px 0px;
+      }
+
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <div class="container">
+      <h2 id="loadingText">Loading Data...</h2>
+      <script>
+        document.getElementById("loadingText").textContent = (() => {
+          switch (localStorage.getItem("i18nextLng") ?? "en") {
+            case "en":
+              return "Loading Data...";
+            case "de":
+              return "Loading Data...";
+            case "es":
+              return "Loading Data...";
+            case "fr":
+              return "Loading Data...";
+            case "it":
+              return "Loading Data...";
+            case "ja":
+              return "Loading Data...";
+            case "ko":
+              return "Loading Data...";
+            case "zh-CN":
+              return "Loading Data...";
+            case "zh-TW":
+              return "Loading Data...";
+            default:
+              return "Loading Data...";
+          }
+        })();
+      </script>
+
+      <span class="spinnerRoot">
+        <svg viewBox="22 22 44 44">
+          <circle class="spinner" cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6" />
+        </svg>
+      </span>
+    </div>
+  </div>
+
   <script type="module" src="/src/main.tsx"></script>
 </body>
 
