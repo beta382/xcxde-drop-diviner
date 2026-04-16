@@ -1,27 +1,40 @@
 /// <reference types ="vitest/config" />
 import babel from "@rolldown/plugin-babel";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { fileURLToPath } from "url";
+import { defineConfig, type UserConfig } from "vite";
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
-  resolve: {
-    alias: {
-      "~": "./src",
-    },
-  },
-  test: {
-    coverage: {
-      exclude: ["src/*.{ts,tsx}", "src/ui", "src/util/workers"],
-      include: ["src/**/*.{ts,tsx}"],
-      provider: "istanbul",
-      thresholds: {
-        branches: 92,
-        functions: 97,
-        statements: 97,
+export default defineConfig(async ({ mode }) => {
+  const devPlugins = [];
+  if (mode === "development") {
+    const { i18nextHMRPlugin } = await import("i18next-hmr/vite");
+    devPlugins.push(i18nextHMRPlugin({ localesDir: "./public/locales" }));
+  }
+
+  return {
+    plugins: [
+      react(),
+      babel({ presets: [reactCompilerPreset()] }),
+      ...devPlugins,
+    ],
+    resolve: {
+      alias: {
+        "~": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
-    globals: true,
-  },
+    test: {
+      coverage: {
+        exclude: ["src/*.{ts,tsx}", "src/ui", "src/util/workers"],
+        include: ["src/**/*.{ts,tsx}"],
+        provider: "istanbul",
+        thresholds: {
+          branches: 92,
+          functions: 97,
+          statements: 97,
+        },
+      },
+      globals: true,
+    },
+  } satisfies UserConfig;
 });

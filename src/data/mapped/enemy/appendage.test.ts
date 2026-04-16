@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import type { Language } from "~/data/mapped/common";
+import type { Language } from "~/common/languages";
 import { enemyTemplates } from "~/data/mapped/enemy";
 
 test.each<{

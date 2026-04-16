@@ -1,3 +1,4 @@
+import { languages, type Language } from "~/common/languages";
 import * as bdat from "~/data/bdat/bdat";
 import type { Bdat, BdatRow } from "~/data/bdat/bdat.types";
 
@@ -18,29 +19,6 @@ type NameSource =
   | "WpnDlList"
   | "WpnPcList";
 
-export type Language =
-  | "en"
-  | "de"
-  | "es"
-  | "fr"
-  | "it"
-  | "ja"
-  | "ko"
-  | "zh-CN"
-  | "zh-TW";
-
-const gameShorthands = {
-  en: "Us",
-  de: "Ge",
-  es: "Sp",
-  fr: "Fr",
-  it: "It",
-  ja: "Jp",
-  ko: "Kr",
-  "zh-CN": "Cn",
-  "zh-TW": "Tw",
-} as const satisfies Record<Language, string>;
-
 export class Named {
   protected readonly nameId: number;
   readonly #nameSource: NameSource;
@@ -51,7 +29,7 @@ export class Named {
   }
 
   getLocalizedName(language: Language): string {
-    return bdat[`get${this.#nameSource}${gameShorthands[language]}`]()[
+    return bdat[`get${this.#nameSource}${languages[language].gameShorthand}`]()[
       this.nameId
     ].name;
   }

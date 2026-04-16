@@ -1,5 +1,6 @@
+import type { Language } from "~/common/languages";
 import type { DropTable } from "~/data/mapped/chest/drop-table";
-import { Named, type Language } from "~/data/mapped/common";
+import { Named } from "~/data/mapped/common";
 
 /** Represents an enemy appendage */
 export class Appendage extends Named {
