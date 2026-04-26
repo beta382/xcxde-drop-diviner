@@ -11,6 +11,7 @@ import { RngProvider } from "~/ui/common/contexts/rng/RngProvider";
 import { SettingsProvider } from "~/ui/common/contexts/settings/SettingsProvider";
 import { LootFinder } from "~/ui/loot-finder/LootFinder";
 import { SeedStateFinder } from "~/ui/seed-state-finder/SeedStateFinder";
+import { TopBar } from "~/ui/TopBar";
 
 export function App() {
   const [t, i18n] = useTranslation();
@@ -40,20 +41,24 @@ export function App() {
 
 function Content() {
   return (
-    <Container maxWidth="desktop">
-      <Stack
-        spacing={3}
-        sx={{
-          minHeight: "100dvh",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 3,
-          marginBottom: 3,
-        }}
-      >
-        <SeedStateFinder />
-        <LootFinder />
-      </Stack>
-    </Container>
+    <>
+      <TopBar />
+
+      <Container maxWidth="desktop">
+        <Stack
+          spacing={3}
+          sx={{
+            minHeight: "100dvh",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 3,
+            marginBottom: 3,
+          }}
+        >
+          <SeedStateFinder />
+          <LootFinder />
+        </Stack>
+      </Container>
+    </>
   );
 }

@@ -3,6 +3,7 @@ import babel from "@rolldown/plugin-babel";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { fileURLToPath } from "url";
 import { defineConfig, type UserConfig } from "vite";
+import svgr from "vite-plugin-svgr";
 
 // https://vite.dev/config/
 export default defineConfig(async ({ mode }) => {
@@ -15,6 +16,7 @@ export default defineConfig(async ({ mode }) => {
   return {
     plugins: [
       react(),
+      svgr(),
       babel({ presets: [reactCompilerPreset()] }),
       ...devPlugins,
     ],

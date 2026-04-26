@@ -1,5 +1,6 @@
 {
   "title": "XCX: DE - Drop Diviner",
+  "shortTitle": "Drop Diviner",
   "common": {
     "confirm": "Confirm",
     "cancel": "Cancel",
@@ -9,6 +10,100 @@
     "shouldSpaceJoinedList": true,
     "stringQuote": "\"{{str}}\"",
     "seconds": "{{sec, number}}s"
+  },
+  "settings": {
+    "headerLabel": "Settings",
+    "label": {
+      "siteLanguage": "Language",
+      "playerVoiceLanguage": "Voice Language",
+      "systemType": "System Type",
+      "playerGender": "Cross Gender",
+      "playerVoice": "Cross Voice",
+      "advanced": "Advanced Settings",
+      "numThreads": "Threads",
+      "allowManualInput": "Allow Manual Seed/State Input",
+      "seedFinder": {
+        "header": "Seed Finder",
+        "workerType": "Worker Type",
+        "region": "Region",
+        "barracksStartState": "Barracks Start State",
+        "barracksSearchDepth": "Barracks Search Depth",
+        "noctilumFogStartState": "Noctilum (Fog) Start State",
+        "noctilumFogSearchDepth": "Noctilum (Fog) Search Depth",
+        "volitarisStartState": "Volitaris Start State",
+        "volitarisSearchDepth": "Volitaris Search Depth",
+        "customStartState": "Custom Start State",
+        "customSearchDepth": "Custom Search Depth",
+        "switch1SystemTickRateHz": "Switch 1 Tick Rate (Hz)",
+        "switch2SystemTickRateHz": "Switch 2 Tick Rate (Hz)",
+        "userTimingAdjustmentMs": "Timing Adjustment (ms)",
+        "minimumVoiceLines": "Minimum Voice Lines"
+      },
+      "stateFinder": {
+        "header": "State Finder",
+        "searchDepth": "Search Depth",
+        "minimumVoiceLines": "Minimum Voice Lines",
+        "numUpcomingVoiceLines": "Displayed Upcoming Voice Lines"
+      },
+      "lootFinder": {
+        "header": "Loot Finder",
+        "showAllEnemies": "Show All Enemies",
+        "treasureSensor": "Treasure Sensor (%)",
+        "offsetSearchDepth": "Find Offset Search Depth",
+        "searchSearchDepth": "Search Equipment Search Depth",
+        "statesToDisplay": "Maximum Displayed Equipment States",
+        "assumeOptimalParty": "Rate Assumes Optimal Party"
+      }
+    },
+    "tooltip": {
+      "restoreDefault": "Restore Default ({{value, number}})",
+      "restoreDefaultEmpty": "Restore Default (Blank)",
+      "siteLanguage": "Languages marked with a warning symbol only have game data translations.",
+      "numThreads": "Used for Seed Finding and Equipment Search. Defaults to your system's number of logical processors, however, certain privacy-focused browsers lie about this. If that is the case, either whitelist this site in your browser's settings, or manually enter a value.",
+      "seedFinder": {
+        "workerType": "Which Seed Finder worker implementation to use. WASM is faster and should be stable, while TypeScript is slower but more heavily tested.",
+        "region": "The region in which you are performing the seed search. This affects your Start State and Search Depth.",
+        "startState": "The first RNG state in each seed to look for a voice line sequence match at when performing a seed search.",
+        "searchDepth": "The number of RNG states in each seed to look for a voice line sequence match at when performing a seed search.",
+        "systemTickRateHz": "The rate at which the system advances its tick, which is used to seed the RNG.",
+        "userTimingAdjustmentMs": "An adjustment added to your measured seed time. This is automatically updated based on the average actual timing offset from your recent seed searches. Changing this value will clear your Timing Adjustment History and replace it with the new value.",
+        "minimumVoiceLines": "Prevents starting a seed search until you have at least this many voice lines."
+      },
+      "stateFinder": {
+        "searchDepth": "The number of RNG states to look for a voice line sequence match at when performing a state search.",
+        "minimumVoiceLines": "Prevents starting a state search until you have at least this many voice lines.",
+        "numUpcomingVoiceLines": "The number of upcoming voice lines to display."
+      },
+      "lootFinder": {
+        "showAllEnemies": "When off, only a curated selection of enemies with known setups are shown.",
+        "offsetSearchDepth": "The number of RNG states to look for an exact equipment match at when performing an offset search.",
+        "searchSearchDepth": "The number of RNG states to look for satisfying equipment at when performing an equipment search.",
+        "statesToDisplay": "The maximum number of equipment search results to display for each equipment filter.",
+        "assumeOptimalParty": "Only applies to displayed drop rates; has no effect on RNG (RNG always assumes Solo Cross). When enabled, drop rates assume that you have a party of characters with effectively identical classes to Cross. When disabled, drop rates assume that your party is Solo Cross."
+      }
+    },
+    "options": {
+      "playerGender": {
+        "female": "Female",
+        "male": "Male"
+      },
+      "systemType": {
+        "switch1": "Switch 1",
+        "switch2": "Switch 2"
+      },
+      "seedFinder": {
+        "workerType": {
+          "wasm": "WASM",
+          "ts": "TypeScript"
+        },
+        "region": {
+          "barracks": "Barracks",
+          "noctilumFog": "Noctilum (Fog)",
+          "volitaris": "Volitaris",
+          "custom": "Custom"
+        }
+      }
+    }
   },
   "vas": {
     "female": [
