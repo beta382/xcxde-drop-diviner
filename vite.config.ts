@@ -14,6 +14,7 @@ export default defineConfig(async ({ mode }) => {
   }
 
   return {
+    base: mode === "development" ? "/" : "/xcxde-drop-diviner/",
     plugins: [
       react(),
       svgr(),

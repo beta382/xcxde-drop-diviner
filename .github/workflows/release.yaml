@@ -1,0 +1,27 @@
+name: Generate Release
+
+on:
+  push:
+    tags: "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Verify Tag is at origin/main
+        run: |
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "Tag is not at origin/main, skipping release."
+            exit 1
+          fi
+      - name: Release
+        uses: softprops/action-gh-release@v3
+        with:
+          generate_release_notes: true
