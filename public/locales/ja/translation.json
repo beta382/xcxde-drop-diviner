@@ -1,1 +1,375 @@
-{}
+{
+  "title": "XCX: DE - Drop Diviner",
+  "shortTitle": "Drop Diviner",
+  "common": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "searchFailed": "Not Found",
+    "listJoin": ",",
+    "shouldSpaceJoinedList": true,
+    "stringQuote": "\"{{str}}\"",
+    "seconds": "{{sec, number}}s"
+  },
+  "settings": {
+    "headerLabel": "Settings",
+    "label": {
+      "siteLanguage": "Language",
+      "playerVoiceLanguage": "Voice Language",
+      "systemType": "System Type",
+      "playerGender": "Cross Gender",
+      "playerVoice": "Cross Voice",
+      "advanced": "Advanced Settings",
+      "numThreads": "Threads",
+      "allowManualInput": "Allow Manual Seed/State Input",
+      "seedFinder": {
+        "header": "Seed Finder",
+        "workerType": "Worker Type",
+        "region": "Region",
+        "barracksStartState": "Barracks Start State",
+        "barracksSearchDepth": "Barracks Search Depth",
+        "noctilumFogStartState": "Noctilum (Fog) Start State",
+        "noctilumFogSearchDepth": "Noctilum (Fog) Search Depth",
+        "volitarisStartState": "Volitaris Start State",
+        "volitarisSearchDepth": "Volitaris Search Depth",
+        "customStartState": "Custom Start State",
+        "customSearchDepth": "Custom Search Depth",
+        "switch1SystemTickRateHz": "Switch 1 Tick Rate (Hz)",
+        "switch2SystemTickRateHz": "Switch 2 Tick Rate (Hz)",
+        "userTimingAdjustmentMs": "Timing Adjustment (ms)",
+        "minimumVoiceLines": "Minimum Voice Lines"
+      },
+      "stateFinder": {
+        "header": "State Finder",
+        "searchDepth": "Search Depth",
+        "minimumVoiceLines": "Minimum Voice Lines",
+        "numUpcomingVoiceLines": "Displayed Upcoming Voice Lines"
+      },
+      "lootFinder": {
+        "header": "Loot Finder",
+        "showAllEnemies": "Show All Enemies",
+        "treasureSensor": "Treasure Sensor (%)",
+        "offsetSearchDepth": "Find Offset Search Depth",
+        "searchSearchDepth": "Search Equipment Search Depth",
+        "statesToDisplay": "Maximum Displayed Equipment States",
+        "assumeOptimalParty": "Rate Assumes Optimal Party"
+      }
+    },
+    "tooltip": {
+      "restoreDefault": "Restore Default ({{value, number}})",
+      "restoreDefaultEmpty": "Restore Default (Blank)",
+      "siteLanguage": "Languages marked with a warning symbol only have game data translations.",
+      "numThreads": "Used for Seed Finding and Equipment Search. Defaults to your system's number of logical processors, however, certain privacy-focused browsers lie about this. If that is the case, either whitelist this site in your browser's settings, or manually enter a value.",
+      "seedFinder": {
+        "workerType": "Which Seed Finder worker implementation to use. WASM is faster and should be stable, while TypeScript is slower but more heavily tested.",
+        "region": "The region in which you are performing the seed search. This affects your Start State and Search Depth.",
+        "startState": "The first RNG state in each seed to look for a voice line sequence match at when performing a seed search.",
+        "searchDepth": "The number of RNG states in each seed to look for a voice line sequence match at when performing a seed search.",
+        "systemTickRateHz": "The rate at which the system advances its tick, which is used to seed the RNG.",
+        "userTimingAdjustmentMs": "An adjustment added to your measured seed time. This is automatically updated based on the average actual timing offset from your recent seed searches. Changing this value will clear your Timing Adjustment History and replace it with the new value.",
+        "minimumVoiceLines": "Prevents starting a seed search until you have at least this many voice lines."
+      },
+      "stateFinder": {
+        "searchDepth": "The number of RNG states to look for a voice line sequence match at when performing a state search.",
+        "minimumVoiceLines": "Prevents starting a state search until you have at least this many voice lines.",
+        "numUpcomingVoiceLines": "The number of upcoming voice lines to display."
+      },
+      "lootFinder": {
+        "showAllEnemies": "When off, only a curated selection of enemies with known setups are shown.",
+        "offsetSearchDepth": "The number of RNG states to look for an exact equipment match at when performing an offset search.",
+        "searchSearchDepth": "The number of RNG states to look for satisfying equipment at when performing an equipment search.",
+        "statesToDisplay": "The maximum number of equipment search results to display for each equipment filter.",
+        "assumeOptimalParty": "Only applies to displayed drop rates; has no effect on RNG (RNG always assumes Solo Cross). When enabled, drop rates assume that you have a party of characters with effectively identical classes to Cross. When disabled, drop rates assume that your party is Solo Cross."
+      }
+    },
+    "options": {
+      "playerGender": {
+        "female": "Female",
+        "male": "Male"
+      },
+      "systemType": {
+        "switch1": "Switch 1",
+        "switch2": "Switch 2"
+      },
+      "seedFinder": {
+        "workerType": {
+          "wasm": "WASM",
+          "ts": "TypeScript"
+        },
+        "region": {
+          "barracks": "Barracks",
+          "noctilumFog": "Noctilum (Fog)",
+          "volitaris": "Volitaris",
+          "custom": "Custom"
+        }
+      }
+    }
+  },
+  "vas": {
+    "female": [
+      {
+        "name": "Heroic (Tara Platt)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "All right, lets do it",
+          "victory": "They never stood a chance",
+          "scout": "Shall we?",
+          "huh": "Huh?",
+          "greeting": "Hey!",
+          "stagger": "They staggered me!",
+          "topple": "Ouch, that hurt!"
+        }
+      },
+      {
+        "name": "Independent (Kira Buckland)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Here we go",
+          "victory": "Nice job",
+          "scout": "We're gonna do great",
+          "huh": "Huh?",
+          "greeting": "Hey there!",
+          "stagger": "So what if you staggered me?",
+          "topple": "That hurts you jerk!"
+        }
+      },
+      {
+        "name": "Mature (Mary Elizabeth McGlynn)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Shall we?",
+          "victory": "Success",
+          "scout": "It's a pleasure",
+          "huh": "Ugh!",
+          "greeting": "Hello",
+          "stagger": "I have lost my balance!",
+          "topple": "Augh! Ow!"
+        }
+      },
+      {
+        "name": "Peppy (Cristina Valenzuela)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Here goes!",
+          "victory": "We did great!",
+          "scout": "You're in good hands now!",
+          "huh": "Huh?!",
+          "greeting": "Whadaya say?",
+          "stagger": "Ugh, I hate losing my balance!",
+          "topple": "I didn't trip, they tripped me!"
+        }
+      },
+      {
+        "name": "Joker (Kate Higgins)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Let's murderate 'em!",
+          "victory": "We sure owned them!",
+          "scout": "Oh, all right",
+          "huh": "Wuh?!",
+          "greeting": "Hey hey!",
+          "stagger": "Uhh, I'm getting wobbly!",
+          "topple": "Oops! I fell!"
+        }
+      },
+      {
+        "name": "Classic (Carina Reeves)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Let's get on with it",
+          "victory": "Yay, We win!",
+          "scout": "Shall we then?",
+          "huh": "What?!",
+          "greeting": "Hello",
+          "stagger": "Ugh, I've lost my balance",
+          "topple": "How dare you trip me up?!"
+        }
+      },
+      {
+        "name": "Soldier (Erin Fitzgerald/Cat Protano)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Let's go",
+          "victory": "Huh. Is that it?",
+          "scout": "Just tell me what to do",
+          "huh": "Huh?",
+          "greeting": "Shall we?",
+          "stagger": "Ugh! I've been staggered!",
+          "topple": "Ow! Damn it!"
+        }
+      }
+    ],
+    "male": [
+      {
+        "name": "Heroic (Yuri Lowenthal)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Alright, it's on",
+          "victory": "Victory is ours!",
+          "scout": "Ready and willing!",
+          "huh": "Huh?",
+          "greeting": "Hey there",
+          "stagger": "They staggered me!",
+          "topple": "Ow, my footing"
+        }
+      },
+      {
+        "name": "Rookie (Bryce Papenbrook)",
+        "voiceLines": {
+          "jump": "Hup!",
+          "battle": "Come on!",
+          "victory": "We've still got a ways to go",
+          "scout": "I'll do what I can to help",
+          "huh": "Huh?",
+          "greeting": "Hey",
+          "stagger": "I'm off balance!",
+          "topple": "Ugh, toppled?!"
+        }
+      },
+      {
+        "name": "Rebel (Keith Silverstein)",
+        "voiceLines": {
+          "jump": "Ngh!",
+          "battle": "Let's get this started!",
+          "victory": "Easy peasy",
+          "scout": "Rock 'n roll",
+          "huh": "Uwagh",
+          "greeting": "Yo",
+          "stagger": "Oh! So you like knockin' people around",
+          "topple": "Hey, that hurt!"
+        }
+      },
+      {
+        "name": "Studious (Robbie Daymond)",
+        "voiceLines": {
+          "jump": "Euh!",
+          "battle": "Ready?",
+          "victory": "Game and set",
+          "scout": "We'll work well together, I'm sure",
+          "huh": "What?",
+          "greeting": "Greetings",
+          "stagger": "Hey!",
+          "topple": "That hurts!"
+        }
+      },
+      {
+        "name": "Joker (Ben Diskin)",
+        "voiceLines": {
+          "jump": "Yeuh!",
+          "battle": "Let's do this thing!",
+          "victory": "Woohoo, we did it!",
+          "scout": "It's nice to be wanted",
+          "huh": "Huh?",
+          "greeting": "Hey there",
+          "stagger": "I've been staggered!",
+          "topple": "Gah-ow, man down!"
+        }
+      },
+      {
+        "name": "Classic (Adam Howden)",
+        "voiceLines": {
+          "jump": "Hngh!",
+          "battle": "Right, let's do this!",
+          "victory": "Sorry, but it was you or us",
+          "scout": "Shall we?",
+          "huh": "Huh?",
+          "greeting": "Cheers",
+          "stagger": "They staggered me",
+          "topple": "Ughhh!"
+        }
+      },
+      {
+        "name": "Warrior (Dan Woren)",
+        "voiceLines": {
+          "jump": "Hm!",
+          "battle": "Here I come, sunshine",
+          "victory": "There's no substitute for real combat",
+          "scout": "Let's do this",
+          "huh": "Huh?",
+          "greeting": "Hey",
+          "stagger": "I'm off balance",
+          "topple": "A topple attack, clever"
+        }
+      }
+    ]
+  },
+  "seedStateFinder": {
+    "seedLabel": "Seed",
+    "discardSeedTooltip": "Discard Seed",
+    "discardSeedDialog": {
+      "title": "Warning!",
+      "body": "Are you sure you want to discard your seed?"
+    },
+    "stateLabel": "State",
+    "restoreStateTooltip": "Restore Previous State ({{prevState, number}})",
+    "prevStateButton": "Prev State",
+    "nextStateButton": "Next State",
+    "upcomingVoiceLinesLabel": "Upcoming Voice Lines",
+    "timerTooltip": "Tip: Aim for when you see the Nintendo logo, and when you press A to load your save file, but above all, be consistent. The tool will automatically adjust to your habits to improve the speed of future seed searches.",
+    "timerStartButton": "System Started",
+    "timerStopButton": "Save File Loaded",
+    "timerResetButton": "Reset Timer",
+    "inputVoiceLinesLabel": "Input Voice Lines",
+    "clearVoiceLinesButton": "Clear Voice Lines",
+    "restoreVoiceLinesButton": "Restore Voice Lines",
+    "undoVoiceLineButton": "Undo Voice Line",
+    "startSeedSearchButton": "Start Seed Search",
+    "startStateSearchButton": "Start State Search",
+    "statesAdvancedLabel": "+{{states, number}}"
+  },
+  "lootFinder": {
+    "enemySearchLabel": "Enemy",
+    "detailedEnemyLabel": "{{enemyName}} (id: {{enemyId}})",
+    "enemyListTruncatedLabel": "Results truncated, type to filter",
+    "enemyLevelsLabel": "Level",
+    "enemyHeroicTaleLevelLabel": "{{level}}†",
+    "enemyAppendagesLabel": "Broken Appendage",
+    "enemyAppendageLabel": "{{gameName}} (id: {{debugName}})",
+    "enemyBodyOnlyAppendageLabel": "{{body}} only",
+    "classesTooltip": "You must not have any party members other than Cross.",
+    "classesLabel": "Cross Class",
+    "offset": {
+      "tabLabel": "Find Offset",
+      "historyLabel": "Offset History: ",
+      "emptyHistoryLabel": "None",
+      "multipleOffsetLabel": "({{offsets}})",
+      "multipleOffsetJoin": "/",
+      "clearStaleHistoryTooltip": "Discard Stale Offset History",
+      "clearHistoryTooltip": "Discard Offset History",
+      "clearEquipmentButton": "Clear Equipment Drops",
+      "startSearchButton": "Start Offset Search",
+      "numberHeading": "Equipment Drop #{{index}}",
+      "traitsLabel": "Trait #{{index}}",
+      "addTraitsLabel": "Add Trait #{{index}}",
+      "augmentsLabel": "Augment Slots"
+    },
+    "search": {
+      "tabLabel": "Search Equipment",
+      "clearEquipmentButton": "Clear Equipment Filters",
+      "startSearchButton": "Start Equipment Search",
+      "numberHeading": "Equipment Filter #{{index}}",
+      "traitsLabel": "Required Trait #{{index}}",
+      "addTraitsLabel": "Add Required Trait #{{index}}",
+      "augmentsLabel": "Minimum Augment Slots",
+      "statesLabel": "States: ",
+      "moreStatesLabel": "...",
+      "distanceLabel": "Distance: ",
+      "noDistanceLabel": "All passed, search again",
+      "awaitingSearchLabel": "Awaiting successful search",
+      "dropChanceLabel": "Drop Rate: 1 in {{rate, number}}",
+      "cannotDropLabel": "Undroppable"
+    },
+    "equipmentLabel": "Equipment",
+    "itemTypeGroups": {
+      "groundWeaponsMelee": "Ground Weapons (Melee)",
+      "groundWeaponsRanged": "Ground Weapons (Ranged)",
+      "groundArmors": "Ground Armors",
+      "skellWeapons": "Skell Weapons",
+      "skellArmors": "Skell Armors",
+      "augments": "Augments",
+      "materials": "Materials",
+      "other": "Other"
+    },
+    "endSearchButton": "End Search"
+  }
+}
