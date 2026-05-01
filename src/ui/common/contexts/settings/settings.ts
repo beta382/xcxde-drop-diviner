@@ -26,7 +26,9 @@ function migrateToV1(): SettingsV1 {
     systemType: "switch1",
     playerGender: "female",
     playerVoice: 0,
-    playerVoiceLanguage: "en",
+    playerVoiceLanguage: navigator.language.toLowerCase().startsWith("ja")
+      ? "ja"
+      : "en",
     "advanced.numThreads": "system",
     "advanced.allowManualSeedStateInput": false,
     "advanced.seedFinder.workerType": "wasm",

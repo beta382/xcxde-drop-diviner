@@ -1,1 +1,453 @@
-{}
+{
+  "title": "XCX: DE - Drop Diviner",
+  "shortTitle": "Drop Diviner",
+  "common": {
+    "confirm": "OK",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "searchFailed": "見つかりません",
+    "listJoin": "、",
+    "shouldSpaceJoinedList": false,
+    "stringQuote": "『{{str}}』",
+    "seconds": "{{sec, number}}秒"
+  },
+  "settings": {
+    "headerLabel": "設定",
+    "label": {
+      "siteLanguage": "言語",
+      "playerVoiceLanguage": "ボイス言語",
+      "systemType": "本体の種類",
+      "playerGender": "クロスの性別",
+      "playerVoice": "クロスのボイス",
+      "advanced": "詳細設定",
+      "numThreads": "スレッド数",
+      "allowManualInput": "シード/ステートの手動入力を許可",
+      "seedFinder": {
+        "header": "シードファインダー",
+        "workerType": "ワーカーの種類",
+        "region": "ゾーン",
+        "barracksStartState": "ブレイドホーム 開始ステート",
+        "barracksSearchDepth": "ブレイドホーム 検索深度",
+        "noctilumFogStartState": "夜光の森 (濃霧) 開始ステート",
+        "noctilumFogSearchDepth": "夜光の森 (濃霧) 検索深度",
+        "volitarisStartState": "浮遊大陸 開始ステート",
+        "volitarisSearchDepth": "浮遊大陸 検索深度",
+        "customStartState": "カスタム開始ステート",
+        "customSearchDepth": "カスタム検索深度",
+        "switch1SystemTickRateHz": "Switch 1 チックレート (Hz)",
+        "switch2SystemTickRateHz": "Switch 2 チックレート (Hz)",
+        "userTimingAdjustmentMs": "タイミング補正 (ms)",
+        "minimumVoiceLines": "最少ボイス数"
+      },
+      "stateFinder": {
+        "header": "ステートファインダー",
+        "searchDepth": "検索深度",
+        "minimumVoiceLines": "最少ボイス数",
+        "numUpcomingVoiceLines": "表示するボイス予測数"
+      },
+      "lootFinder": {
+        "header": "ルートファインダー",
+        "showAllEnemies": "全エネミーを表示",
+        "treasureSensor": "トレジャーセンサー (%)",
+        "offsetSearchDepth": "オフセット検索深度",
+        "searchSearchDepth": "装備検索深度",
+        "statesToDisplay": "表示する装備ステートの最大数",
+        "assumeOptimalParty": "ドロップ率を最適パーティ前提で表示"
+      }
+    },
+    "tooltip": {
+      "restoreDefault": "デフォルトに戻す ({{value, number}})",
+      "restoreDefaultEmpty": "デフォルトに戻す (空欄)",
+      "siteLanguage": "警告マーク付きの言語はゲームデータのみ翻訳されています。",
+      "numThreads": "シード検索と装備検索で使用されます。既定値はシステムの論理プロセッサ数ですが、プライバシー重視のブラウザではこの値が偽装されることがあります。その場合は、ブラウザの設定でこのサイトをホワイトリストに登録するか、手動で値を入力してください。",
+      "seedFinder": {
+        "workerType": "使用するシードファインダーのワーカー実装。WASM の方が高速で安定しているはずです。TypeScript は低速ですがテストが厚めです。",
+        "region": "シード検索を行う地域。開始ステートと検索深度に影響します。",
+        "startState": "シード検索時に、ボイスシーケンスの一致を探し始める各シードの最初の RNG ステート。",
+        "searchDepth": "シード検索時に、各シードでボイスシーケンスの一致を探す RNG ステートの数。",
+        "systemTickRateHz": "RNG のシード生成に使われる、本体のチックが進む速さ。",
+        "userTimingAdjustmentMs": "計測したシード時間に加算される補正値。直近のシード検索における実際のタイミング差分の平均から自動更新されます。この値を変更するとタイミング補正履歴がクリアされ、新しい値に置き換わります。",
+        "minimumVoiceLines": "ボイスがこの数に達するまでシード検索の開始を抑制します。"
+      },
+      "stateFinder": {
+        "searchDepth": "ステート検索時に、ボイスシーケンスの一致を探す RNG ステートの数。",
+        "minimumVoiceLines": "ボイスがこの数に達するまでステート検索の開始を抑制します。",
+        "numUpcomingVoiceLines": "表示するボイス予測の数。"
+      },
+      "lootFinder": {
+        "showAllEnemies": "オフにすると、既知のセットアップがあるエネミーのみが表示されます。",
+        "offsetSearchDepth": "オフセット検索時に、装備の完全一致を探す RNG ステートの数。",
+        "searchSearchDepth": "装備検索時に、条件を満たす装備を探す RNG ステートの数。",
+        "statesToDisplay": "各装備フィルタについて表示する装備検索結果の最大数。",
+        "assumeOptimalParty": "表示されるドロップ率にのみ反映され、RNG には影響しません (RNG は常に Solo クロスを前提とします)。有効にすると、クロスと実質的に同じクラスのキャラクターでパーティが組まれている前提でドロップ率を計算します。無効にすると、Solo クロスのパーティを前提に計算します。"
+      }
+    },
+    "options": {
+      "playerGender": {
+        "female": "女性",
+        "male": "男性"
+      },
+      "systemType": {
+        "switch1": "Switch 1",
+        "switch2": "Switch 2"
+      },
+      "seedFinder": {
+        "workerType": {
+          "wasm": "WASM",
+          "ts": "TypeScript"
+        },
+        "region": {
+          "barracks": "ブレイドホーム",
+          "noctilumFog": "夜光の森 (濃霧)",
+          "volitaris": "浮遊大陸",
+          "custom": "カスタム"
+        }
+      }
+    }
+  },
+  "vas": {
+    "female": [
+      {
+        "name": "王道 cv.前田愛",
+        "voiceLines": {
+          "jump": "やっ",
+          "battle": "さぁ、行こう！",
+          "victory": "これくらいなら倒せて当然！",
+          "scout": "よろしくね！",
+          "huh": "えっ？",
+          "greeting": "やあ！",
+          "stagger": "崩された！？",
+          "topple": "ありゃりゃ、転んじゃった..."
+        }
+      },
+      {
+        "name": "ツンデレ cv.佐藤利奈",
+        "voiceLines": {
+          "jump": "ふっ",
+          "battle": "いくわよ！",
+          "victory": "う～ん、上出来よね！",
+          "scout": "一緒に頑張りましょ！",
+          "huh": "ふぇっ！？",
+          "greeting": "ハ～イ！",
+          "stagger": "く、崩したからって何よ！？",
+          "topple": "痛いじゃない、バカ！"
+        }
+      },
+      {
+        "name": "ささやき cv.小倉唯",
+        "voiceLines": {
+          "jump": "ほっ",
+          "battle": "戦いの始まり",
+          "victory": "勝利...！",
+          "scout": "お供します",
+          "huh": "えっ...？",
+          "greeting": "ハイ",
+          "stagger": "崩し...！？",
+          "topple": "いたぁ、屈辱..."
+        }
+      },
+      {
+        "name": "お嬢さま cv.勝田詩織",
+        "voiceLines": {
+          "jump": "りゃあっ",
+          "battle": "よろしくって？",
+          "victory": "勝ちましたわね",
+          "scout": "よろしくお願いいたしますわ！",
+          "huh": "あぁっ！？",
+          "greeting": "ごきげんよう！",
+          "stagger": "バランスを崩された！？",
+          "topple": "えぁっ、イタタ..."
+        }
+      },
+      {
+        "name": "甘え声 cv.内田真礼",
+        "voiceLines": {
+          "jump": "えいっ",
+          "battle": "行きます！",
+          "victory": "上手に戦えました！",
+          "scout": "大船に乗ったつもりでいいですよ、えぇ！",
+          "huh": "ほぇっ！？",
+          "greeting": "よろしくお願いしま～す！",
+          "stagger": "崩しは嫌いですぅ！",
+          "topple": "ひぃ、自分で転んだわけじゃないですから！"
+        }
+      },
+      {
+        "name": "アホドジ cv.上坂すみれ",
+        "voiceLines": {
+          "jump": "よっと",
+          "battle": "パパパっとやっちゃうよ！",
+          "victory": "完璧な大勝利～！",
+          "scout": "もぉ、しょうがないなぁ！",
+          "huh": "ふぇ～はっ！？",
+          "greeting": "どうも～！",
+          "stagger": "フラフラだぁ～",
+          "topple": "うわぁ、転んだ！？"
+        }
+      },
+      {
+        "name": "軍人 cv.田中敦子",
+        "voiceLines": {
+          "jump": "やっ",
+          "battle": "全員抜刀、攻撃を開始する！",
+          "victory": "雑魚を相手に何発使うつもり？",
+          "scout": "お手並み拝見ね",
+          "huh": "えっ？",
+          "greeting": "よろしくね",
+          "stagger": "崩しなんて...！？",
+          "topple": "くっ、転ばされた...！？"
+        }
+      },
+      {
+        "name": "セクシー cv.小清水亜美",
+        "voiceLines": {
+          "jump": "えいっ",
+          "battle": "始めましょうか",
+          "victory": "この手応え、よかったわ",
+          "scout": "よろしくたのむわね",
+          "huh": "はっ！？",
+          "greeting": "ハ～イ！",
+          "stagger": "崩された！？",
+          "topple": "まぁ、イッタ～い！"
+        }
+      },
+      {
+        "name": "関西弁 cv.白石涼子",
+        "voiceLines": {
+          "jump": "よっ",
+          "battle": "ほな、行こか！",
+          "victory": "よっしゃ、ようやったな！",
+          "scout": "うちと頑張ろな！",
+          "huh": "はっ！？",
+          "greeting": "やあ",
+          "stagger": "崩してきよった！？",
+          "topple": "こかすとか卑怯やわ！"
+        }
+      },
+      {
+        "name": "和風 cv.鈴木麻里子",
+        "voiceLines": {
+          "jump": "はっ",
+          "battle": "さぁ、ゆくぞ！",
+          "victory": "ふう、こんなものか",
+          "scout": "この身、預けよう",
+          "huh": "ふん",
+          "greeting": "よろしく頼む",
+          "stagger": "うぐっ、崩しだと...！？",
+          "topple": "いてっ、やってくれる...！"
+        }
+      }
+    ],
+    "male": [
+      {
+        "name": "王道 cv.浅沼晋太郎",
+        "voiceLines": {
+          "jump": "ほっ",
+          "battle": "さぁ、行くぞ！",
+          "victory": "これで勝利だ！",
+          "scout": "よろしくなぁ！",
+          "huh": "おっ！？",
+          "greeting": "よろしくな",
+          "stagger": "崩された！",
+          "topple": "いてっ、足を取られた！"
+        }
+      },
+      {
+        "name": "ライバル cv.内山昂輝",
+        "voiceLines": {
+          "jump": "ふっ",
+          "battle": "行きます！",
+          "victory": "目的が果たせるのは、まだ先ですね",
+          "scout": "役に立てるよう、頑張ります！",
+          "huh": "えっ？",
+          "greeting": "やあ",
+          "stagger": "崩された！",
+          "topple": "くっ、転倒した...！"
+        }
+      },
+      {
+        "name": "熱血 cv.宮下栄治",
+        "voiceLines": {
+          "jump": "へっ",
+          "battle": "おっぱじめるか！",
+          "victory": "余裕！余裕！",
+          "scout": "よろしく頼むぜ！",
+          "huh": "おっ！？",
+          "greeting": "おっす！",
+          "stagger": "崩しとは、オシャレじゃねぇか！",
+          "topple": "いってーな、この野郎！"
+        }
+      },
+      {
+        "name": "優等生 cv.立花慎之介",
+        "voiceLines": {
+          "jump": "たっ",
+          "battle": "準備はいいですか",
+          "victory": "勝負あったようですね",
+          "scout": "共に励みましょう",
+          "huh": "なにっ！？",
+          "greeting": "こんにちは",
+          "stagger": "なにっ",
+          "topple": "こんな痛み...！"
+        }
+      },
+      {
+        "name": "耽美 cv.柿原徹也",
+        "voiceLines": {
+          "jump": "はっ",
+          "battle": "やろうか",
+          "victory": "悪くはなかったかな",
+          "scout": "仲良くなれるといいね",
+          "huh": "なっ！？",
+          "greeting": "やあ",
+          "stagger": "うっ...！？",
+          "topple": "痛いじゃないか！"
+        }
+      },
+      {
+        "name": "中二病 cv.保志総一郎",
+        "voiceLines": {
+          "jump": "ふっ",
+          "battle": "やろうか",
+          "victory": "悪いな、この力、制御不能でね",
+          "scout": "とんだプレジャー、だな",
+          "huh": "なっ！？",
+          "greeting": "ふっ、ふっ、ふっ",
+          "stagger": "崩、された...！？",
+          "topple": "世界が、転倒する...！？"
+        }
+      },
+      {
+        "name": "軍人 cv.浪川大輔",
+        "voiceLines": {
+          "jump": "ふんっ",
+          "battle": "戦闘開始だ",
+          "victory": "当然の勝利だな",
+          "scout": "新しい仲間か、よろしくな",
+          "huh": "おっ！？",
+          "greeting": "おう",
+          "stagger": "崩されただと...！？",
+          "topple": "転倒した、こしゃくな...！"
+        }
+      },
+      {
+        "name": "アニキ cv.関俊彦",
+        "voiceLines": {
+          "jump": "いよっ",
+          "battle": "いっちょやるか！",
+          "victory": "よし、俺たちの勝利だ！",
+          "scout": "頼られるの、嬉しいなぁ！",
+          "huh": "へぇっ！？",
+          "greeting": "よう！",
+          "stagger": "おっと、崩された...！",
+          "topple": "あがっ、転倒技か！？"
+        }
+      },
+      {
+        "name": "関西弁 cv.小野坂昌也",
+        "voiceLines": {
+          "jump": "ほっ",
+          "battle": "さぁ、いくで～！",
+          "victory": "堪忍な、こっちも死ぬわけにはいけへんのや",
+          "scout": "よろしくたのんまっせ～！",
+          "huh": "へぇっ！？",
+          "greeting": "まいど～！",
+          "stagger": "崩されたか！",
+          "topple": "アイター！？"
+        }
+      },
+      {
+        "name": "古武士 cv.田中秀幸",
+        "voiceLines": {
+          "jump": "ほっ",
+          "battle": "いざ、参らん！",
+          "victory": "一戦に勝る修練は無い",
+          "scout": "よろしく頼む",
+          "huh": "んっ？",
+          "greeting": "よう！",
+          "stagger": "崩しの技か！",
+          "topple": "転倒技とは、やるな..."
+        }
+      }
+    ]
+  },
+  "seedStateFinder": {
+    "seedLabel": "シード",
+    "discardSeedTooltip": "シードを破棄",
+    "discardSeedDialog": {
+      "title": "警告！",
+      "body": "シードを破棄してもよろしいですか？"
+    },
+    "stateLabel": "ステート",
+    "restoreStateTooltip": "前のステートに戻す ({{prevState, number}})",
+    "prevStateButton": "ステートを戻す",
+    "nextStateButton": "ステートを進める",
+    "upcomingVoiceLinesLabel": "ボイス予測",
+    "timerTooltip": "ヒント: Nintendo ロゴが表示された瞬間と、A ボタンでセーブデータをロードする瞬間を狙ってください。何よりも一貫性が重要です。ツールがあなたの操作ラグに合わせて自動調整し、今後のシード検索を高速化します。",
+    "timerStartButton": "本体起動",
+    "timerStopButton": "セーブデータのロード開始",
+    "timerResetButton": "タイマーをリセット",
+    "inputVoiceLinesLabel": "入力ボイス",
+    "clearVoiceLinesButton": "入力ボイスをクリア",
+    "restoreVoiceLinesButton": "入力ボイスを復元",
+    "undoVoiceLineButton": "ボイスを1つ戻す",
+    "startSeedSearchButton": "シード検索",
+    "startStateSearchButton": "ステート検索",
+    "statesAdvancedLabel": "+{{states, number}}"
+  },
+  "lootFinder": {
+    "enemySearchLabel": "エネミー",
+    "detailedEnemyLabel": "{{enemyName}} (id: {{enemyId}})",
+    "enemyListTruncatedLabel": "結果は省略されています。入力して絞り込んでください",
+    "enemyLevelsLabel": "レベル",
+    "enemyHeroicTaleLevelLabel": "{{level}}†",
+    "enemyAppendagesLabel": "破壊部位",
+    "enemyAppendageLabel": "{{gameName}} (id: {{debugName}})",
+    "enemyBodyOnlyAppendageLabel": "{{body}} のみ",
+    "classesTooltip": "クロス以外のパーティメンバーは必ず外してください。",
+    "classesLabel": "クロスのクラス",
+    "offset": {
+      "tabLabel": "オフセット検索",
+      "historyLabel": "オフセット履歴: ",
+      "emptyHistoryLabel": "なし",
+      "multipleOffsetLabel": "({{offsets}})",
+      "multipleOffsetJoin": "/",
+      "clearStaleHistoryTooltip": "古いオフセット履歴を破棄",
+      "clearHistoryTooltip": "オフセット履歴を破棄",
+      "clearEquipmentButton": "装備ドロップをクリア",
+      "startSearchButton": "オフセット検索",
+      "numberHeading": "装備ドロップ #{{index}}",
+      "traitsLabel": "アフィックス #{{index}}",
+      "addTraitsLabel": "アフィックス #{{index}} を追加",
+      "augmentsLabel": "デバイススロット"
+    },
+    "search": {
+      "tabLabel": "装備検索",
+      "clearEquipmentButton": "装備フィルタをクリア",
+      "startSearchButton": "装備検索",
+      "numberHeading": "装備フィルタ #{{index}}",
+      "traitsLabel": "アフィックス #{{index}}",
+      "addTraitsLabel": "アフィックス #{{index}} を追加",
+      "augmentsLabel": "最少デバイススロット数",
+      "statesLabel": "ステート: ",
+      "moreStatesLabel": "...",
+      "distanceLabel": "ディスタンス: ",
+      "noDistanceLabel": "全て通過。再検索してください",
+      "awaitingSearchLabel": "検索成功待ち",
+      "dropChanceLabel": "ドロップ率: 1/{{rate, number}}",
+      "cannotDropLabel": "ドロップ不可"
+    },
+    "equipmentLabel": "装備",
+    "itemTypeGroups": {
+      "groundWeaponsMelee": "インナーウェポン (近接)",
+      "groundWeaponsRanged": "インナーウェポン (遠距離)",
+      "groundArmors": "インナーアーマー",
+      "skellWeapons": "ドールウェポン",
+      "skellArmors": "ドールアーマー",
+      "augments": "デバイス",
+      "materials": "マテリアル",
+      "other": "その他"
+    },
+    "endSearchButton": "検索を終了"
+  }
+}

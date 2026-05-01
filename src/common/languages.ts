@@ -65,7 +65,7 @@ export const languages = {
     localName: "日本語",
     gameShorthand: "Jp",
     muiShorthand: "jaJP",
-    uiTranslated: false,
+    uiTranslated: true,
   },
   // Korean
   ko: {

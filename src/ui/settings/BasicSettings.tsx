@@ -56,6 +56,7 @@ export function BasicSettings() {
           updateSettings({
             playerVoiceLanguage: playerVoiceLanguages[nextValueIndex],
           });
+          updateSettings({ playerVoice: 0 });
         }}
       />
 
