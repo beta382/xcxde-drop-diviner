@@ -385,7 +385,7 @@
     "upcomingVoiceLinesLabel": "ボイス予測",
     "timerTooltip": "ヒント: Nintendo ロゴが表示された瞬間と、A ボタンでセーブデータをロードする瞬間を狙ってください。何よりも一貫性が重要です。ツールがあなたの操作ラグに合わせて自動調整し、今後のシード検索を高速化します。",
     "timerStartButton": "本体起動",
-    "timerStopButton": "ロード完了",
+    "timerStopButton": "セーブデータのロード開始",
     "timerResetButton": "タイマーをリセット",
     "inputVoiceLinesLabel": "入力ボイス",
     "clearVoiceLinesButton": "入力ボイスをクリア",
