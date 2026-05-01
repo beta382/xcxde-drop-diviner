@@ -93,7 +93,10 @@
       <h2 id="loadingText">Loading Data...</h2>
       <script>
         document.getElementById("loadingText").textContent = (() => {
-          switch (localStorage.getItem("i18nextLng") ?? "en") {
+          switch (
+            localStorage.getItem("i18nextLng") ??
+            (navigator.language.toLowerCase().startsWith("ja") ? "ja" : "en")
+          ) {
             case "en":
               return "Loading Data...";
             case "de":
