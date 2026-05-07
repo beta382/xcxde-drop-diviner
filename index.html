@@ -92,33 +92,27 @@
     <div class="container">
       <h2 id="loadingText">Loading Data...</h2>
       <script>
-        document.getElementById("loadingText").textContent = (() => {
-          switch (
-            localStorage.getItem("i18nextLng") ??
-            (navigator.language.toLowerCase().startsWith("ja") ? "ja" : "en")
-          ) {
-            case "en":
-              return "Loading Data...";
-            case "de":
-              return "Loading Data...";
-            case "es":
-              return "Loading Data...";
-            case "fr":
-              return "Loading Data...";
-            case "it":
-              return "Loading Data...";
-            case "ja":
-              return "データをロード中...";
-            case "ko":
-              return "Loading Data...";
-            case "zh-CN":
-              return "Loading Data...";
-            case "zh-TW":
-              return "Loading Data...";
-            default:
-              return "Loading Data...";
-          }
-        })();
+        const loadingTextStrs = {
+          en: "Loading Data...",
+          de: "Loading Data...",
+          es: "Loading Data...",
+          fr: "Loading Data...",
+          it: "Loading Data...",
+          ja: "データをロード中...",
+          ko: "Loading Data...",
+          "zh-CN": "Loading Data...",
+          "zh-TW": "Loading Data...",
+        };
+
+        const userLanguage =
+          localStorage.getItem("i18nextLng") ??
+          Object.keys(loadingTextStrs).find((key) =>
+            navigator.language.startsWith(key),
+          ) ??
+          "en";
+
+        document.getElementById("loadingText").textContent =
+          loadingTextStrs[userLanguage] ?? "Loading Data...";
       </script>
 
       <span class="spinnerRoot">
