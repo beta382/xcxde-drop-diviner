@@ -29,7 +29,7 @@ export function AdvancedSettings() {
             ? navigator.hardwareConcurrency.toString()
             : undefined
         }
-        min={0}
+        min={1}
         onChange={(nextValue) => {
           updateSettings({ "advanced.numThreads": nextValue ?? "system" });
         }}
