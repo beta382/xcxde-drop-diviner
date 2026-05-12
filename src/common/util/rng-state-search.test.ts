@@ -111,6 +111,18 @@ test.each<{
     expectedResult: true,
     expectedStateIndex: 348,
   },
+  {
+    seed: 0x5a100f87,
+    startState: 100,
+    searchDepth: 400,
+    min: 0,
+    max: 8,
+    targetSequence: [
+      6, 5, 2, 1, 3, 0, 7, 6, 0, 7, 7, 1, 4, 1, 2, 3, 1, 7, 6, 4,
+    ],
+    expectedResult: true,
+    expectedStateIndex: 356,
+  },
 ])(
   "searchRngForSequence(new MtRand($seed)@$startState, $searchDepth, " +
     "(rng) => rng.rangeRange($min, $max), $targetSequence) yields " +

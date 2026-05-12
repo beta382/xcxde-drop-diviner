@@ -1,6 +1,8 @@
 import { FixedSizeQueue } from "~/common/util/fixed-size-queue";
 import type { MtRand } from "~/common/util/mt-rand";
 
+const ROLLING_HASH_SHIFT = 3;
+
 /**
  * Tests whether the given rng engine contains a targetSequence starting within
  * its next searchDepth advances, returning the current stateIndex of the rng
@@ -97,7 +99,11 @@ function alterSequenceHash(
   oldValue: number,
   nextValue: number,
 ) {
-  return rol(oldSequenceHash ^ rol(oldValue, sequenceSize) ^ nextValue, 1);
+  return (
+    rol(oldSequenceHash, ROLLING_HASH_SHIFT) ^
+    rol(oldValue, sequenceSize * ROLLING_HASH_SHIFT) ^
+    nextValue
+  );
 }
 
 function rol(x: number, shift: number) {

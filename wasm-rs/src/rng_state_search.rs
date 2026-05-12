@@ -1,5 +1,7 @@
 use crate::{fixed_size_queue::FixedSizeQueue, mt_rand::MtRand};
 
+const ROLLING_HASH_SHIFT: u32 = 3;
+
 pub fn search_rng_for_sequence<F>(
   rng: &mut MtRand,
   search_depth: u32,
@@ -68,8 +70,9 @@ fn alter_sequence_hash(
   old_value: u32,
   next_value: u32,
 ) -> u32 {
-  (old_sequence_hash ^ old_value.rotate_left(sequence_size) ^ next_value)
-    .rotate_left(1)
+  old_sequence_hash.rotate_left(ROLLING_HASH_SHIFT)
+    ^ old_value.rotate_left(sequence_size * ROLLING_HASH_SHIFT)
+    ^ next_value
 }
 
 #[cfg(test)]
@@ -208,6 +211,19 @@ mod tests {
       vec![6, 5, 2, 1, 3, 0, 7, 6, 0, 7, 7, 1],
       true,
       348,
+    );
+  }
+
+  #[test]
+  fn search_rng_for_sequence_results_9() {
+    search_rng_for_sequence_results(
+      0x5a100f87,
+      100,
+      400,
+      3,
+      vec![6, 5, 2, 1, 3, 0, 7, 6, 0, 7, 7, 1, 4, 1, 2, 3, 1, 7, 6, 4],
+      true,
+      356,
     );
   }
 }
