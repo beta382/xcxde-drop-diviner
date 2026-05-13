@@ -37,7 +37,6 @@ export default defineConfig(async ({ mode }) => {
           statements: 97,
         },
       },
-      globals: true,
     },
   } satisfies UserConfig;
 });
