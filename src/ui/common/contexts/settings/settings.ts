@@ -2,13 +2,17 @@ import type {
   SettingsLatest,
   SettingsUpdate,
   SettingsV1,
+  SettingsV2,
 } from "~/ui/common/contexts/settings/settings.types";
 
 const SETTINGS_VERSION_KEY = "settings-version";
 const SETTINGS_KEY = "settings";
 
 export const defaultSettings: SettingsLatest = (() => {
-  const settings = migrateToV1();
+  let settings;
+  settings = migrateToV1();
+  settings = migrateToV2(settings);
+
   return settings;
 })();
 
@@ -58,20 +62,24 @@ function migrateToV1(): SettingsV1 {
   };
 }
 
+function migrateToV2(settings: SettingsV1): SettingsV2 {
+  return { ...settings, "advanced.seedFinder.useSeedFile": false };
+}
+
 function initialize(): { version: 1; settings: SettingsV1 } {
   return { version: 1, settings: migrateToV1() };
 }
 
-// function maybeLoadAndMigrate<PrevSettings, NextSettings>(
-//   prevVersion: number,
-//   prevSettings: PrevSettings | undefined,
-//   migration: (settings: PrevSettings) => NextSettings,
-// ): { version: number; settings: NextSettings } {
-//   return {
-//     version: prevVersion + 1,
-//     settings: migration(prevSettings ?? (loadSettings() as PrevSettings)),
-//   };
-// }
+function maybeLoadAndMigrate<PrevSettings, NextSettings>(
+  prevVersion: number,
+  prevSettings: PrevSettings | undefined,
+  migration: (settings: PrevSettings) => NextSettings,
+): { version: number; settings: NextSettings } {
+  return {
+    version: prevVersion + 1,
+    settings: migration(prevSettings ?? (loadSettings() as PrevSettings)),
+  };
+}
 
 function loadOrCommit(
   version: number,
@@ -121,14 +129,14 @@ export function loadAndMigrateSettings(): SettingsLatest {
     case 0:
       ({ version, settings } = initialize());
     // fall through
-    // case n:
-    //   ({ version, settings } = maybeLoadAndMigrate(
-    //     version,
-    //     settings,
-    //     migrateToVn,
-    //   ));
-    // // fall through
     case 1:
+      ({ version, settings } = maybeLoadAndMigrate(
+        version,
+        settings,
+        migrateToV2,
+      ));
+    // fall through
+    case 2:
       settings = loadOrCommit(version, settings);
       break;
     default:

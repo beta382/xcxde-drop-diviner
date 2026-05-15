@@ -2,6 +2,7 @@ import type { FindEquipmentController } from "~/ui/common/workers/find-equipment
 import type { FindSeedController } from "~/ui/common/workers/find-seed/find-seed.types";
 import type { FindStateController } from "~/ui/common/workers/find-state/find-state.types";
 import type { LongStateAdvanceWorker } from "~/ui/common/workers/long-state-advance/long-state-advance.types";
+import type { SearchSeedFileController } from "~/ui/common/workers/search-seed-file/search-seed-file.types";
 
 export function createFindSeedController(): FindSeedController {
   return new Worker(new URL("./find-seed/controller.ts", import.meta.url), {
@@ -27,4 +28,13 @@ export function createFindEquipmentController(): FindEquipmentController {
     new URL("./find-equipment/controller.ts", import.meta.url),
     { type: "module" },
   ) as FindEquipmentController;
+}
+
+export function createSearchSeedFileController(): SearchSeedFileController {
+  return new Worker(
+    new URL("./search-seed-file/controller.ts", import.meta.url),
+    {
+      type: "module",
+    },
+  ) as SearchSeedFileController;
 }

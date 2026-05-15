@@ -24,6 +24,7 @@
       "allowManualInput": "Allow Manual Seed/State Input",
       "seedFinder": {
         "header": "Seed Finder",
+        "useSeedFile": "Use XCXWW Seed File",
         "workerType": "Worker Type",
         "region": "Region",
         "barracksStartState": "Barracks Start State",
@@ -61,6 +62,7 @@
       "siteLanguage": "Languages marked with a warning symbol only have game data translations.",
       "numThreads": "Used for Seed Finding and Equipment Search. Defaults to your system's number of logical processors, however, certain privacy-focused browsers lie about this. If that is the case, either whitelist this site in your browser's settings, or manually enter a value.",
       "seedFinder": {
+        "useSeedFile": "When on, changes the Seed Finder to instead accept an XCXWW Seed File to search for a precomputed seed within. All other Seed Finder settings will be ignored.",
         "workerType": "Which Seed Finder worker implementation to use. WASM is faster and should be stable, while TypeScript is slower but more heavily tested.",
         "region": "The region in which you are performing the seed search. This affects your Start State and Search Depth.",
         "startState": "The first RNG state in each seed to look for a voice line sequence match at when performing a seed search.",
@@ -309,6 +311,21 @@
     "timerStartButton": "System Started",
     "timerStopButton": "Save File Loaded",
     "timerResetButton": "Reset Timer",
+    "seedFilePicker": {
+      "selectFileButton": "Select File",
+      "selectedFileLabel": "{{file}}",
+      "noFileSelectedLabel": "No File Selected",
+      "noFileHeaderLabel": "Awaiting file selection",
+      "fileHeaderErrorLabel": {
+        "cannotLoad": "Could not load file",
+        "badType": "Unrecognized file type",
+        "oldFile": "Seed File is from older, unsupported version of XCXWW"
+      },
+      "fileHeaderLabel": {
+        "seeds": "Seeds: 0x{{startSeed}} - 0x{{stopSeed}}",
+        "state": "Start State: {{state, number}}"
+      }
+    },
     "inputVoiceLinesLabel": "Input Voice Lines",
     "clearVoiceLinesButton": "Clear Voice Lines",
     "restoreVoiceLinesButton": "Restore Voice Lines",

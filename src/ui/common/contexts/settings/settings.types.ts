@@ -3,7 +3,7 @@ import type { VoiceLanguage } from "~/common/languages";
 import type { DeconstructedMtRandView } from "~/ui/common/contexts/rng/mt-rand-view";
 import type { FindSeedControllerCommand } from "~/ui/common/workers/find-seed/find-seed.types";
 
-export type SettingsLatest = SettingsV1;
+export type SettingsLatest = SettingsV2;
 export type SettingsUpdate = RequireExactlyOne<{
   [K in keyof SettingsLatest]?:
     | SettingsLatest[K]
@@ -46,3 +46,7 @@ export interface SettingsV1 {
   "advanced.lootFinder.statesToDisplay": number;
   "hidden.rng": DeconstructedMtRandView | null;
 }
+
+export type SettingsV2 = SettingsV1 & {
+  "advanced.seedFinder.useSeedFile": boolean;
+};

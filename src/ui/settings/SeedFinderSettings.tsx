@@ -5,10 +5,12 @@ import { useMutableSettings } from "~/ui/common/contexts/settings/settings-conte
 import type { SettingsLatest } from "~/ui/common/contexts/settings/settings.types";
 import { SettingIntegerField } from "~/ui/settings/util/SettingIntegerField";
 import { SettingSelect } from "~/ui/settings/util/SettingSelect";
+import { SettingSwitch } from "~/ui/settings/util/SettingSwitch";
 
 export function SeedFinderSettings() {
-  const [t] = useTranslation();
   const [settings, updateSettings] = useMutableSettings();
+
+  const [t] = useTranslation();
 
   const workerTypes: SettingsLatest["advanced.seedFinder.workerType"][] = [
     "wasm",
@@ -23,6 +25,18 @@ export function SeedFinderSettings() {
 
   return (
     <>
+      {/* Use Seed File */}
+      <SettingSwitch
+        tooltip={t(($) => $.settings.tooltip.seedFinder.useSeedFile)}
+        label={t(($) => $.settings.label.seedFinder.useSeedFile)}
+        checked={settings["advanced.seedFinder.useSeedFile"]}
+        onChange={(nextChecked) => {
+          updateSettings({ "advanced.seedFinder.useSeedFile": nextChecked });
+        }}
+      />
+
+      <Divider />
+
       {/* Worker Type */}
       <SettingSelect
         label={t(($) => $.settings.label.seedFinder.workerType)}

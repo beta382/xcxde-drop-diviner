@@ -9,14 +9,17 @@ import { useLockout } from "~/ui/common/contexts/lockout/lockout-context";
 import { useRng } from "~/ui/common/contexts/rng/rng-context";
 import { useSettings } from "~/ui/common/contexts/settings/settings-context";
 import { SeedEstimateTimer } from "~/ui/seed-state-finder/SeedEstimateTimer";
+import { SeedFilePicker } from "~/ui/seed-state-finder/SeedFilePicker";
 import { SeedStateControl } from "~/ui/seed-state-finder/SeedStateControl";
 import type { VoiceLineKey } from "~/ui/seed-state-finder/voice-lines";
 import { VoiceLineSearch } from "~/ui/seed-state-finder/VoiceLineSearch";
+import { useSeedFileSearch } from "~/ui/seed-state-finder/worker-hooks/seed-file-search-hook";
 import { useSeedSearch } from "~/ui/seed-state-finder/worker-hooks/seed-search-hook";
 import { useStateSearch } from "~/ui/seed-state-finder/worker-hooks/state-search-hook";
 
 export function SeedStateFinder() {
   const settings = useSettings();
+  const useSeedFile = settings["advanced.seedFinder.useSeedFile"];
   const rng = useRng();
 
   const lockout = useLockout("global");
@@ -26,14 +29,18 @@ export function SeedStateFinder() {
   const [isTimingSeed, setIsTimingSeed] = useState(false);
   const [seedEstimateMs, setSeedEstimateMs] = useState<number>();
 
+  const [seedFile, setSeedFile] = useState<File>();
+
   const [voiceLines, setVoiceLines] = useState<KeyedList<VoiceLineKey>>([]);
   const [backupVoiceLines, setBackupVoiceLines] =
     useState<KeyedList<VoiceLineKey>>();
 
   const [doSeedSearchAction, handleCancelSeedSearch] = useSeedSearch(
-    !rng,
+    !rng && !useSeedFile,
     seedEstimateMs ?? 0,
   );
+  const [doSeedFileSearchAction, handleCancelSeedFileSearch] =
+    useSeedFileSearch(!rng && useSeedFile, seedFile);
   const [doStateSearchAction, handleCancelStateSearch] = useStateSearch(!!rng);
 
   const [prevSeed, setPrevSeed] = useState(rng?.seed);
@@ -66,19 +73,29 @@ export function SeedStateFinder() {
             },
           }}
         >
-          <SeedEstimateTimer
-            disabled={!!rng || lockout}
-            onStartTimer={() => {
-              setIsTimingSeed(true);
-            }}
-            onMakeSeedEstimate={(nextSeedEstimateMs) => {
-              setSeedEstimateMs(nextSeedEstimateMs);
-              setIsTimingSeed(false);
-            }}
-            onReset={() => {
-              setSeedEstimateMs(undefined);
-            }}
-          />
+          {!useSeedFile ? (
+            <SeedEstimateTimer
+              disabled={!!rng || lockout}
+              onStartTimer={() => {
+                setIsTimingSeed(true);
+              }}
+              onMakeSeedEstimate={(nextSeedEstimateMs) => {
+                setSeedEstimateMs(nextSeedEstimateMs);
+                setIsTimingSeed(false);
+              }}
+              onReset={() => {
+                setSeedEstimateMs(undefined);
+                setVoiceLines([]);
+                setBackupVoiceLines(undefined);
+              }}
+            />
+          ) : (
+            <SeedFilePicker
+              seedFile={seedFile}
+              disabled={!!rng || lockout}
+              onChangeSeedFile={setSeedFile}
+            />
+          )}
         </Collapse>
 
         <VoiceLineSearch
@@ -89,17 +106,33 @@ export function SeedStateFinder() {
               ? $.seedStateFinder.startSeedSearchButton
               : $.seedStateFinder.startStateSearchButton,
           )}
-          disabled={!rng && seedEstimateMs === undefined}
+          disabled={
+            !rng && !useSeedFile
+              ? seedEstimateMs === undefined
+              : seedFile === undefined
+          }
           minimumVoiceLines={
             !rng
-              ? settings["advanced.seedFinder.minimumVoiceLines"]
+              ? !useSeedFile
+                ? settings["advanced.seedFinder.minimumVoiceLines"]
+                : 12
               : settings["advanced.stateFinder.minimumVoiceLines"]
           }
           onChangeVoiceLines={setVoiceLines}
           onChangeBackupVoiceLines={setBackupVoiceLines}
-          doSearchAction={!rng ? doSeedSearchAction : doStateSearchAction}
+          doSearchAction={
+            !rng
+              ? !useSeedFile
+                ? doSeedSearchAction
+                : doSeedFileSearchAction
+              : doStateSearchAction
+          }
           onCancelSearch={
-            !rng ? handleCancelSeedSearch : handleCancelStateSearch
+            !rng
+              ? !useSeedFile
+                ? handleCancelSeedSearch
+                : handleCancelSeedFileSearch
+              : handleCancelStateSearch
           }
         />
       </Stack>
