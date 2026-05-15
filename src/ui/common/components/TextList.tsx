@@ -25,7 +25,12 @@ export function TextList({
       }}
     >
       {values.map((element, i, arr) => (
-        <Typography key={element.key} {...props} {...element.props}>
+        <Typography
+          key={element.key}
+          sx={{ textAlign: "center" }}
+          {...props}
+          {...element.props}
+        >
           {element.element +
             (i !== arr.length - 1 ? t(($) => $.common.listJoin) : "")}
         </Typography>
