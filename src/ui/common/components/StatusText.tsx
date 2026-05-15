@@ -53,6 +53,7 @@ export function StatusText({
   return (
     <Fade
       in={!(shouldHide || shouldImmediatelyHide)}
+      unmountOnExit
       timeout={{
         appear: 0,
         enter: 0,
