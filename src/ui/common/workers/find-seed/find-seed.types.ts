@@ -1,5 +1,4 @@
 import type { DeconstructedMtRand } from "~/common/util/mt-rand";
-import type { KeyedList } from "~/ui/common/common.types";
 import type {
   TypedWorker,
   WorkerControllerType,
@@ -24,7 +23,7 @@ export interface FindSeedControllerCommand {
   threads: number;
   startState: number;
   searchDepth: number;
-  targetSequence: KeyedList<VoiceLineKey>;
+  targetSequence: VoiceLineKey[];
 }
 
 export interface FindSeedWorkerCommand {

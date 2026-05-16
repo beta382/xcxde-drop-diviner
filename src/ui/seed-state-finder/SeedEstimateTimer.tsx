@@ -1,21 +1,19 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Tooltip from "@mui/material/Tooltip";
-import { useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FilledIcon } from "~/ui/common/components/FilledIcon";
 import { StatusText } from "~/ui/common/components/StatusText";
 import { useBreakpoint, useTimer } from "~/ui/common/hooks";
 
 export function SeedEstimateTimer({
-  disabled = false,
-  isFresh,
+  disabled,
   onStartTimer,
   onMakeSeedEstimate,
   onReset,
 }: {
-  disabled?: boolean;
-  isFresh: boolean;
+  disabled: boolean;
   onStartTimer: () => void;
   onMakeSeedEstimate: (seedEstimateMs: number) => void;
   onReset: () => void;
@@ -27,6 +25,25 @@ export function SeedEstimateTimer({
   const [isTimingSeed, seedTimerMs, startSeedTimer, stopSeedTimer] = useTimer();
   const [wasReset, setWasReset] = useState(false);
 
+  const [shouldMakeSeedEstimate, setShouldMakeSeedEstimate] = useState(false);
+
+  const onMakeSeedEstimateEffectEvent = useEffectEvent(() => {
+    if (seedTimerMs === undefined) {
+      throw new Error(
+        "Attempted to make seed estimate without having a valid seedTimerMs",
+      );
+    }
+
+    onMakeSeedEstimate(seedTimerMs);
+    setShouldMakeSeedEstimate(false);
+  });
+
+  useEffect(() => {
+    if (shouldMakeSeedEstimate) {
+      onMakeSeedEstimateEffectEvent();
+    }
+  }, [shouldMakeSeedEstimate]);
+
   function handleStartTimer(): void {
     startSeedTimer();
     setWasReset(false);
@@ -35,9 +52,8 @@ export function SeedEstimateTimer({
   }
 
   function handleStopTimer(): void {
-    const finalSeedTimerMs = stopSeedTimer();
-
-    onMakeSeedEstimate(finalSeedTimerMs);
+    stopSeedTimer();
+    setShouldMakeSeedEstimate(true);
   }
 
   function handleReset(): void {
@@ -60,7 +76,7 @@ export function SeedEstimateTimer({
         </Tooltip>
       </Grid>
       <Grid size={{ mobile: 6.5, tablet: 5, desktop: 4 }}>
-        {isFresh ? (
+        {isTimingSeed === undefined || wasReset ? (
           <Button
             variant="contained"
             fullWidth
@@ -69,7 +85,7 @@ export function SeedEstimateTimer({
           >
             {t(($) => $.seedStateFinder.timerStartButton)}
           </Button>
-        ) : (isTimingSeed ?? false) ? (
+        ) : isTimingSeed ? (
           <Button
             variant="contained"
             fullWidth

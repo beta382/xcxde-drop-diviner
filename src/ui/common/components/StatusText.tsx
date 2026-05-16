@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
  *   present
  * @param props.isVisible Whether the status should show
  * @param props.fadeoutMs The fade out animation duration
- * @param props.fadeoutDelay The delay before the fades out
+ * @param props.fadeoutDelay The delay before the fade out
  * @param props.shouldImmediatelyHide Whether the should be immediately hidden
  * @returns The component
  */
@@ -46,7 +46,7 @@ export function StatusText({
     }, fadeoutDelay);
 
     return () => {
-      clearInterval(timerId);
+      clearTimeout(timerId);
     };
   }, [fadeoutDelay, isVisible]);
 

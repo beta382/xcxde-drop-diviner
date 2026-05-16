@@ -29,15 +29,7 @@ import { VoiceLineList } from "~/ui/seed-state-finder/VoiceLineList";
 
 const MANUAL_STATE_ADVANCE_IS_LONG_THRESHOLD = 10_000_000;
 
-export function SeedStateControl({
-  disabled = false,
-  onSeedSet,
-  onSeedCleared,
-}: {
-  disabled?: boolean;
-  onSeedSet: () => void;
-  onSeedCleared: () => void;
-}) {
+export function SeedStateControl({ disabled }: { disabled: boolean }) {
   const settings = useSettings();
   const [rng, updateRng] = useMutableRng();
   const [lockout, setLockout] = useMutableLockout("global");
@@ -117,11 +109,8 @@ export function SeedStateControl({
   function handleSetSeed(seed: number | undefined): void {
     if (seed === undefined) {
       updateRng({ type: "reset" });
-      onSeedCleared();
-      return;
     } else {
       updateRng({ type: "setSeedAndResetState", value: seed });
-      onSeedSet();
     }
   }
 

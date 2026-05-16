@@ -1,5 +1,4 @@
 import type { DeconstructedMtRand } from "~/common/util/mt-rand";
-import type { KeyedList } from "~/ui/common/common.types";
 import type {
   TypedWorker,
   WorkerControllerType,
@@ -21,7 +20,7 @@ export type FindStateWorker = TypedWorker<
 export interface FindStateControllerCommand {
   rng: DeconstructedMtRand;
   searchDepth: number;
-  targetSequence: KeyedList<VoiceLineKey>;
+  targetSequence: VoiceLineKey[];
 }
 
 export interface FindStateWorkerCommand {

@@ -29,7 +29,7 @@ onmessage = ({
       }
 
       const targetSequence = data.targetSequence.map(
-        (voiceLine) => indexForVoiceLineKey[voiceLine.element],
+        (voiceLine) => indexForVoiceLineKey[voiceLine],
       );
       const targetSequenceHash = createSequenceHash(targetSequence);
 

@@ -1,6 +1,6 @@
 import type { Breakpoint } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSettings } from "~/ui/common/contexts/settings/settings-context";
 import type { VoiceLineKey } from "~/ui/seed-state-finder/voice-lines";
@@ -21,13 +21,13 @@ import type { VoiceLineKey } from "~/ui/seed-state-finder/voice-lines";
  */
 export function useTimer(
   updateIntervalMs: number = 57, // This number feels nice
-): [boolean | undefined, number | undefined, () => void, () => number] {
-  const [isFresh, setIsFresh] = useState(true);
+): [boolean | undefined, number | undefined, () => void, () => void] {
+  const [isRunning, setIsRunning] = useState<boolean>();
   const [startMs, setStartMs] = useState<number>();
   const [intermediateMs, setIntermediateMs] = useState<number>();
-  const [totalMs, setTotalMs] = useState<number>();
+  const [stopMs, setStopMs] = useState<number>();
 
-  const isRunning = !isFresh ? startMs !== undefined : undefined;
+  const shouldUpdate = useRef(false);
 
   useEffect(() => {
     if (!(isRunning ?? false)) {
@@ -35,7 +35,9 @@ export function useTimer(
     }
 
     const timerId = setInterval(() => {
-      setIntermediateMs(Date.now());
+      if (shouldUpdate.current) {
+        setIntermediateMs(Date.now());
+      }
     }, updateIntervalMs);
 
     return () => {
@@ -45,35 +47,31 @@ export function useTimer(
 
   return [
     isRunning,
-    totalMs ??
-      (startMs !== undefined && intermediateMs !== undefined
-        ? intermediateMs - startMs
-        : undefined),
+    startMs === undefined
+      ? undefined
+      : stopMs !== undefined
+        ? stopMs - startMs
+        : intermediateMs !== undefined
+          ? intermediateMs - startMs
+          : 0,
     // Start
     () => {
-      const innerStartMs = Date.now();
+      const nextStartMs = Date.now();
+      shouldUpdate.current = true;
 
-      setIsFresh(false);
-      setStartMs(innerStartMs);
-      setIntermediateMs(innerStartMs);
-      setTotalMs(undefined);
+      setIsRunning(true);
+      setStartMs(nextStartMs);
+      setIntermediateMs(nextStartMs);
+      setStopMs(undefined);
     },
     // Stop
     () => {
-      const stopMs = Date.now();
+      const nextStopMs = Date.now();
+      shouldUpdate.current = false;
 
-      if (startMs === undefined) {
-        throw new Error(
-          "Cannot call useTimer stop function before calling useTimer start " +
-            "function",
-        );
-      }
-
-      setStartMs(undefined);
+      setIsRunning(false);
       setIntermediateMs(undefined);
-      setTotalMs(stopMs - startMs);
-
-      return stopMs - startMs;
+      setStopMs(nextStopMs);
     },
   ];
 }
