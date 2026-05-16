@@ -45,6 +45,17 @@ export function AdvancedSettings() {
           });
         }}
       />
+
+      {/* Use XCXWW Voice Line Abbreviations */}
+      <SettingSwitch
+        label={t(($) => $.settings.label.useXcxwwVoiceLines)}
+        checked={settings["advanced.useXcxwwVoiceLines"]}
+        onChange={(nextChecked) => {
+          updateSettings({
+            "advanced.useXcxwwVoiceLines": nextChecked,
+          });
+        }}
+      />
     </>
   );
 }

@@ -2,6 +2,7 @@ import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
 import type { KeyedList } from "~/ui/common/common.types";
 import { TextList } from "~/ui/common/components/TextList";
+import { useSettings } from "~/ui/common/contexts/settings/settings-context";
 import { useVoiceLineTranslation } from "~/ui/common/hooks";
 import type { VoiceLineKey } from "~/ui/seed-state-finder/voice-lines";
 
@@ -10,6 +11,8 @@ export function VoiceLineList({
 }: {
   voiceLines: KeyedList<VoiceLineKey> | undefined;
 }) {
+  const settings = useSettings();
+
   const [t] = useTranslation();
   const tVoiceLine = useVoiceLineTranslation();
 
@@ -17,9 +20,11 @@ export function VoiceLineList({
     <TextList
       values={voiceLines.map((voiceLine) => ({
         key: voiceLine.key,
-        element: t(($) => $.common.stringQuote, {
-          str: tVoiceLine(voiceLine.element),
-        }),
+        element: !settings["advanced.useXcxwwVoiceLines"]
+          ? t(($) => $.common.stringQuote, {
+              str: tVoiceLine(voiceLine.element),
+            })
+          : t(($) => $.vas.xcxww.voiceLines[voiceLine.element]),
       }))}
     />
   ) : (

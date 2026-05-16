@@ -22,6 +22,7 @@
       "advanced": "Advanced Settings",
       "numThreads": "Threads",
       "allowManualInput": "Allow Manual Seed/State Input",
+      "useXcxwwVoiceLines": "Use XCXWW Voice Line Abbrs.",
       "seedFinder": {
         "header": "Seed Finder",
         "useSeedFile": "Use XCXWW Seed File",
@@ -293,7 +294,19 @@
           "topple": "A topple attack, clever"
         }
       }
-    ]
+    ],
+    "xcxww": {
+      "voiceLines": {
+        "jump": "J",
+        "battle": "B",
+        "victory": "V",
+        "scout": "Sc",
+        "huh": "H",
+        "greeting": "G",
+        "stagger": "St",
+        "topple": "T"
+      }
+    }
   },
   "seedStateFinder": {
     "seedLabel": "Seed",
@@ -326,6 +339,7 @@
         "state": "Start State: {{state, number}}"
       }
     },
+    "xcxwwVoiceLineButton": "{{voiceLine}} ({{xcxwwVoiceLine}})",
     "inputVoiceLinesLabel": "Input Voice Lines",
     "clearVoiceLinesButton": "Clear Voice Lines",
     "restoreVoiceLinesButton": "Restore Voice Lines",

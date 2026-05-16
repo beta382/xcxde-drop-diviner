@@ -16,6 +16,7 @@ await i18n.init({
   supportedLngs: Object.keys(languages),
   fallbackLng: "en",
   load: "currentOnly",
+  preload: ["en", "ja"],
   backend: {
     loadPath: "./locales/{{lng}}/{{ns}}.json",
   },

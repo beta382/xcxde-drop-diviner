@@ -63,7 +63,11 @@ function migrateToV1(): SettingsV1 {
 }
 
 function migrateToV2(settings: SettingsV1): SettingsV2 {
-  return { ...settings, "advanced.seedFinder.useSeedFile": false };
+  return {
+    ...settings,
+    "advanced.seedFinder.useSeedFile": false,
+    "advanced.useXcxwwVoiceLines": false,
+  };
 }
 
 function initialize(): { version: 1; settings: SettingsV1 } {

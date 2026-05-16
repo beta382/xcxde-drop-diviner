@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
 import type { KeyedList } from "~/ui/common/common.types";
+import { useSettings } from "~/ui/common/contexts/settings/settings-context";
 import { useKey, useVoiceLineTranslation } from "~/ui/common/hooks";
 import {
   voiceLineKeyForIndex,
@@ -20,6 +21,8 @@ export function VoiceLinePicker({
   disabled?: boolean;
   onAddVoiceLine: (voiceLine: KeyedList<VoiceLineKey>[number]) => void;
 }) {
+  const settings = useSettings();
+
   const [t] = useTranslation();
   const tVoiceLine = useVoiceLineTranslation();
 
@@ -40,7 +43,14 @@ export function VoiceLinePicker({
               }}
               sx={{ minHeight: "100%" }}
             >
-              {tVoiceLine(voiceLineKey)}
+              {!settings["advanced.useXcxwwVoiceLines"]
+                ? tVoiceLine(voiceLineKey)
+                : t(($) => $.seedStateFinder.xcxwwVoiceLineButton, {
+                    voiceLine: tVoiceLine(voiceLineKey),
+                    xcxwwVoiceLine: t(
+                      ($) => $.vas.xcxww.voiceLines[voiceLineKey],
+                    ),
+                  })}
             </Button>
           </Grid>
         );

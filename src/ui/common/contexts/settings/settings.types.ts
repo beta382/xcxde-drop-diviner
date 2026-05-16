@@ -49,4 +49,5 @@ export interface SettingsV1 {
 
 export type SettingsV2 = SettingsV1 & {
   "advanced.seedFinder.useSeedFile": boolean;
+  "advanced.useXcxwwVoiceLines": boolean;
 };
