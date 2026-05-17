@@ -9,7 +9,10 @@ import { useLockout } from "~/ui/common/contexts/lockout/lockout-context";
 import { useRng } from "~/ui/common/contexts/rng/rng-context";
 import { useSettings } from "~/ui/common/contexts/settings/settings-context";
 import { SeedEstimateTimer } from "~/ui/seed-state-finder/SeedEstimateTimer";
-import { SeedFilePicker } from "~/ui/seed-state-finder/SeedFilePicker";
+import {
+  SeedFilePicker,
+  type SeedFile,
+} from "~/ui/seed-state-finder/SeedFilePicker";
 import { SeedStateControl } from "~/ui/seed-state-finder/SeedStateControl";
 import type { VoiceLineKey } from "~/ui/seed-state-finder/voice-lines";
 import { VoiceLineSearch } from "~/ui/seed-state-finder/VoiceLineSearch";
@@ -29,7 +32,7 @@ export function SeedStateFinder() {
   const [isTimingSeed, setIsTimingSeed] = useState(false);
   const [seedEstimateMs, setSeedEstimateMs] = useState<number>();
 
-  const [seedFile, setSeedFile] = useState<File>();
+  const [seedFile, setSeedFile] = useState<SeedFile>();
 
   const [voiceLines, setVoiceLines] = useState<KeyedList<VoiceLineKey>>([]);
   const [backupVoiceLines, setBackupVoiceLines] =
@@ -40,7 +43,7 @@ export function SeedStateFinder() {
     seedEstimateMs ?? 0,
   );
   const [doSeedFileSearchAction, handleCancelSeedFileSearch] =
-    useSeedFileSearch(!rng && useSeedFile, seedFile);
+    useSeedFileSearch(!rng && useSeedFile, seedFile?.file);
   const [doStateSearchAction, handleCancelStateSearch] = useStateSearch(!!rng);
 
   const [prevSeed, setPrevSeed] = useState(rng?.seed);
@@ -109,7 +112,7 @@ export function SeedStateFinder() {
           disabled={
             !rng && !useSeedFile
               ? seedEstimateMs === undefined
-              : seedFile === undefined
+              : seedFile === undefined || seedFile.header.type === "error"
           }
           minimumVoiceLines={
             !rng
