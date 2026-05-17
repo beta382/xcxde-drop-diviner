@@ -22,8 +22,10 @@
       "advanced": "詳細設定",
       "numThreads": "スレッド数",
       "allowManualInput": "シード/ステートの手動入力を許可",
+      "useXcxwwVoiceLines": "XCXWW のボイス略号を使用",
       "seedFinder": {
         "header": "シードファインダー",
+        "useSeedFile": "XCXWW のシードファイルを使用",
         "workerType": "ワーカーの種類",
         "region": "ゾーン",
         "barracksStartState": "ブレイドホーム 開始ステート",
@@ -61,6 +63,7 @@
       "siteLanguage": "警告マーク付きの言語はゲームデータのみ翻訳されています。",
       "numThreads": "シード検索と装備検索で使用されます。既定値はシステムの論理プロセッサ数ですが、プライバシー重視のブラウザではこの値が偽装されることがあります。その場合は、ブラウザの設定でこのサイトをホワイトリストに登録するか、手動で値を入力してください。",
       "seedFinder": {
+        "useSeedFile": "オンにすると、シードファインダーが XCXWW のシードファイルを受け取り、その中から事前計算済みのシードを検索します。その他のシードファインダー設定はすべて無視されます。",
         "workerType": "使用するシードファインダーのワーカー実装。WASM の方が高速で安定しているはずです。TypeScript は低速ですがテストが厚めです。",
         "region": "シード検索を行う地域。開始ステートと検索深度に影響します。",
         "startState": "シード検索時に、ボイスシーケンスの一致を探し始める各シードの最初の RNG ステート。",
@@ -369,7 +372,19 @@
           "topple": "転倒技とは、やるな..."
         }
       }
-    ]
+    ],
+    "xcxww": {
+      "voiceLines": {
+        "jump": "J",
+        "battle": "B",
+        "victory": "V",
+        "scout": "Sc",
+        "huh": "H",
+        "greeting": "G",
+        "stagger": "St",
+        "topple": "T"
+      }
+    }
   },
   "seedStateFinder": {
     "seedLabel": "シード",
@@ -387,6 +402,22 @@
     "timerStartButton": "本体起動",
     "timerStopButton": "セーブデータのロード開始",
     "timerResetButton": "タイマーをリセット",
+    "seedFilePicker": {
+      "selectFileButton": "ファイルを選択",
+      "selectedFileLabel": "{{file}}",
+      "noFileSelectedLabel": "ファイル未選択",
+      "noFileHeaderLabel": "ファイル選択待ち",
+      "fileHeaderErrorLabel": {
+        "cannotLoad": "ファイルを読み込めませんでした",
+        "badType": "不明なファイル形式",
+        "oldFile": "シードファイルが旧バージョンの XCXWW のもので非対応です"
+      },
+      "fileHeaderLabel": {
+        "seeds": "シード: 0x{{startSeed}} - 0x{{stopSeed}}",
+        "state": "開始ステート: {{state, number}}"
+      }
+    },
+    "xcxwwVoiceLineButton": "{{voiceLine}} ({{xcxwwVoiceLine}})",
     "inputVoiceLinesLabel": "入力ボイス",
     "clearVoiceLinesButton": "入力ボイスをクリア",
     "restoreVoiceLinesButton": "入力ボイスを復元",
