@@ -15,10 +15,7 @@ concurrency:
 
 jobs:
   ci:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run CI
-        uses: ./.github/workflows/ci.yaml
+    uses: ./.github/workflows/ci.yaml
   deploy:
     needs: ci
     environment:
@@ -57,6 +54,14 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+  release:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Create Release
         uses: softprops/action-gh-release@v3
         with:
