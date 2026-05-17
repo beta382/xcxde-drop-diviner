@@ -3,8 +3,6 @@ import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import {
-  useEffect,
-  useState,
   useTransition,
   type ChangeEvent,
   type Dispatch,
@@ -17,6 +15,11 @@ import { FilledIcon } from "~/ui/common/components/FilledIcon";
 import { TextList } from "~/ui/common/components/TextList";
 import { useBreakpoint } from "~/ui/common/hooks";
 
+export interface SeedFile {
+  file: File;
+  header: AsyncReturnType<typeof readSeedFileHeader>;
+}
+
 function toHexString(value: number): string {
   return value.toString(16).padStart(8, "0").toUpperCase();
 }
@@ -26,7 +29,7 @@ export function SeedFilePicker({
   disabled,
   onChangeSeedFile,
 }: {
-  seedFile: File | undefined;
+  seedFile: SeedFile | undefined;
   disabled: boolean;
   onChangeSeedFile: Dispatch<SetStateAction<typeof seedFile>>;
 }) {
@@ -34,28 +37,7 @@ export function SeedFilePicker({
 
   const breakpoint = useBreakpoint();
 
-  const [innerSeedFile, setInnerSeedFile] = useState(seedFile);
-  const [seedFileHeader, setSeedFileHeader] =
-    useState<AsyncReturnType<typeof readSeedFileHeader>>();
-
   const [, startPeekSeedFileTransition] = useTransition();
-
-  useEffect(() => {
-    if (innerSeedFile === undefined) {
-      return;
-    }
-
-    startPeekSeedFileTransition(async () => {
-      const nextSeedFileHeader = await readSeedFileHeader(innerSeedFile);
-      startPeekSeedFileTransition(() => {
-        if (nextSeedFileHeader.type === "result") {
-          onChangeSeedFile(innerSeedFile);
-        }
-
-        setSeedFileHeader(nextSeedFileHeader);
-      });
-    });
-  }, [innerSeedFile, onChangeSeedFile]);
 
   function handleFileSelect(evt: ChangeEvent<HTMLInputElement>) {
     const files = evt.target.files;
@@ -65,7 +47,13 @@ export function SeedFilePicker({
     }
 
     const nextFile = files[0];
-    setInnerSeedFile(nextFile);
+
+    startPeekSeedFileTransition(async () => {
+      const nextHeader = await readSeedFileHeader(nextFile);
+      startPeekSeedFileTransition(() => {
+        onChangeSeedFile({ file: nextFile, header: nextHeader });
+      });
+    });
   }
 
   return (
@@ -88,16 +76,16 @@ export function SeedFilePicker({
         sx={{ display: "flex", alignItems: "center" }}
       >
         <Typography
-          color={innerSeedFile !== undefined ? undefined : "textDisabled"}
+          color={seedFile !== undefined ? undefined : "textDisabled"}
           sx={{
             textWrap: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
           }}
         >
-          {innerSeedFile !== undefined
+          {seedFile !== undefined
             ? t(($) => $.seedStateFinder.seedFilePicker.selectedFileLabel, {
-                file: innerSeedFile.name,
+                file: seedFile.file.name,
               })
             : t(($) => $.seedStateFinder.seedFilePicker.noFileSelectedLabel)}
         </Typography>
@@ -110,8 +98,8 @@ export function SeedFilePicker({
           justifyContent: breakpoint !== "desktop" ? "center" : undefined,
         }}
       >
-        {seedFileHeader !== undefined ? (
-          seedFileHeader.type === "result" ? (
+        {seedFile !== undefined ? (
+          seedFile.header.type === "result" ? (
             <TextList
               values={[
                 {
@@ -119,8 +107,8 @@ export function SeedFilePicker({
                     ($) =>
                       $.seedStateFinder.seedFilePicker.fileHeaderLabel.seeds,
                     {
-                      startSeed: toHexString(seedFileHeader.value.startSeed),
-                      stopSeed: toHexString(seedFileHeader.value.stopSeed),
+                      startSeed: toHexString(seedFile.header.value.startSeed),
+                      stopSeed: toHexString(seedFile.header.value.stopSeed),
                     },
                   ),
                   key: 0,
@@ -130,7 +118,7 @@ export function SeedFilePicker({
                     ($) =>
                       $.seedStateFinder.seedFilePicker.fileHeaderLabel.state,
                     {
-                      state: seedFileHeader.value.state,
+                      state: seedFile.header.value.state,
                     },
                   ),
                   key: 1,
@@ -145,7 +133,7 @@ export function SeedFilePicker({
               }}
             >
               {(() => {
-                switch (seedFileHeader.error) {
+                switch (seedFile.header.error) {
                   case "prematureEof":
                     return t(
                       ($) =>
@@ -165,7 +153,7 @@ export function SeedFilePicker({
                           .oldFile,
                     );
                   default:
-                    return seedFileHeader.error satisfies never;
+                    return seedFile.header.error satisfies never;
                 }
               })()}
             </Typography>
