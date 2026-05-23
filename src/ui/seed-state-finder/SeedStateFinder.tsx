@@ -110,9 +110,10 @@ export function SeedStateFinder() {
               : $.seedStateFinder.startStateSearchButton,
           )}
           disabled={
-            !rng && !useSeedFile
+            !rng &&
+            (!useSeedFile
               ? seedEstimateMs === undefined
-              : seedFile === undefined || seedFile.header.type === "error"
+              : seedFile === undefined || seedFile.header.type === "error")
           }
           minimumVoiceLines={
             !rng
