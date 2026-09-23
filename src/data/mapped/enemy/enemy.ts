@@ -12,7 +12,7 @@ import type { EquipmentTemplate } from "~/data/mapped/item/equipment";
 import type { Item } from "~/data/mapped/item/item";
 import type { CharacterClass } from "~/data/mapped/party/character-class";
 
-type DropPools = Except<EnemyDropInfo, "level">;
+type DropPools = Except<EnemyDropInfo, "level" | "isHeroicTale">;
 
 /** Represents a specific enemy type. */
 export class EnemyTemplate extends Named {
@@ -61,15 +61,16 @@ export class EnemyTemplate extends Named {
   /**
    * Creates an instance of an Enemy from this Enemy Template.
    *
+   * An Enemy at a Heroic Tale-exclusive level is considered to be under the
+   * effect of Heroic Tale.
+   *
    * @param level The level of the Enemy
    * @param brokenAppendages The broken appendages of the Enemy (exclude body)
    * @returns The Enemy
    */
   createEnemy(level: number, brokenAppendages: Appendage[]): Enemy {
-    if (
-      !this.#levels.includes(level) &&
-      !this.#heroicTaleLevels.includes(level)
-    ) {
+    const isHeroicTale = this.#heroicTaleLevels.includes(level);
+    if (!this.#levels.includes(level) && !isHeroicTale) {
       throw new RangeError(
         `level=${level.toString()} is invalid, must be in ` +
           `[${this.#levels.toString()}] or ` +
@@ -90,7 +91,7 @@ export class EnemyTemplate extends Named {
     return new Enemy(
       this.id,
       this.nameId,
-      { level, ...this.#dropPools },
+      { level, isHeroicTale, ...this.#dropPools },
       brokenAppendages,
     );
   }
@@ -120,6 +121,11 @@ export class Enemy extends Named {
   /** The level for this enemy. */
   get level(): number {
     return this.#dropInfo.level;
+  }
+
+  /** Whether this enemy is under the effect of Heroic Tale. */
+  get isHeroicTale(): boolean {
+    return this.#dropInfo.isHeroicTale;
   }
 
   /** The broken appendages for this enemy (includes body) */
@@ -164,7 +170,11 @@ export class Enemy extends Named {
     const chests: { dropTable: DropTable; chestDropInfo: ChestDropInfo }[] = [];
     for (const appendage of this.#brokenAppendages) {
       const dropTable = appendage.dropTable;
-      const chestQuality = dropTable.rollChestQuality(rng, treasureSensor);
+      const chestQuality = dropTable.rollChestQuality(
+        rng,
+        treasureSensor,
+        this.#dropInfo,
+      );
       if (!chestQuality) {
         continue;
       }

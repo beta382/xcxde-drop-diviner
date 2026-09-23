@@ -30,6 +30,7 @@ test.each<{
     appendageIndex: 4,
     enemyDropInfo: {
       level: 50,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 24,
       skellArmorPoolId: 6,
@@ -56,6 +57,7 @@ test.each<{
     appendageIndex: 4,
     enemyDropInfo: {
       level: 50,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 24,
       skellArmorPoolId: 6,
@@ -95,6 +97,7 @@ test.each<{
     appendageIndex: 1,
     enemyDropInfo: {
       level: 50,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 24,
       skellArmorPoolId: 6,
@@ -120,12 +123,14 @@ test.each<{
   id: number;
   seed: number;
   treasureSensor: number;
+  isHeroicTale: boolean;
   expectedChestQualities: (ChestQuality | null)[];
 }>([
   {
     id: 5,
     seed: 0,
     treasureSensor: 0,
+    isHeroicTale: false,
     expectedChestQualities: [
       "silver",
       null,
@@ -142,7 +147,26 @@ test.each<{
   {
     id: 5,
     seed: 0,
+    treasureSensor: 0,
+    isHeroicTale: true,
+    expectedChestQualities: [
+      "gold",
+      "bronze",
+      "gold",
+      "bronze",
+      "bronze",
+      "bronze",
+      "bronze",
+      "bronze",
+      "silver",
+      "bronze",
+    ],
+  },
+  {
+    id: 5,
+    seed: 0,
     treasureSensor: 25,
+    isHeroicTale: false,
     expectedChestQualities: [
       "gold",
       "gold",
@@ -160,6 +184,26 @@ test.each<{
     id: 2975,
     seed: 0x3eadee18,
     treasureSensor: 100,
+    isHeroicTale: false,
+    expectedChestQualities: [
+      "silver",
+      "silver",
+      "silver",
+      "silver",
+      "silver",
+      "silver",
+      "silver",
+      "silver",
+      "silver",
+      "silver",
+    ],
+  },
+  {
+    // Gold is impossible, so Heroic Tale can't upgrade silver
+    id: 2975,
+    seed: 0x3eadee18,
+    treasureSensor: 100,
+    isHeroicTale: true,
     expectedChestQualities: [
       "silver",
       "silver",
@@ -174,14 +218,24 @@ test.each<{
     ],
   },
 ])(
-  "dropTables[$id].rollChestQuality(new MtRand($seed), $treasureSensor) for " +
-    "$expectedChestQualities.length trials equals $expectedChestQualities",
-  ({ id, seed, treasureSensor, expectedChestQualities }) => {
+  "dropTables[$id].rollChestQuality(new MtRand($seed), $treasureSensor, " +
+    "{ isHeroicTale: $isHeroicTale }) for $expectedChestQualities.length " +
+    "trials equals $expectedChestQualities",
+  ({ id, seed, treasureSensor, isHeroicTale, expectedChestQualities }) => {
     const dropTable = dropTables[id];
     const rng = new MtRand(seed);
+    const enemyDropInfo: EnemyDropInfo = {
+      level: 1,
+      isHeroicTale,
+      groundArmorPoolId: 0,
+      skellWeaponPoolId: 0,
+      skellArmorPoolId: 0,
+    };
     const actualChestQualities = Array.from({
       length: expectedChestQualities.length,
-    }).map(() => dropTable.rollChestQuality(rng, treasureSensor));
+    }).map(() =>
+      dropTable.rollChestQuality(rng, treasureSensor, enemyDropInfo),
+    );
 
     expect(actualChestQualities).toEqual(expectedChestQualities);
   },
@@ -201,6 +255,7 @@ test.each<{
     crossClassId: 1, // Drifter
     enemyDropInfo: {
       level: 68,
+      isHeroicTale: false,
       groundArmorPoolId: 5,
       skellWeaponPoolId: 19,
       skellArmorPoolId: 1,
@@ -222,6 +277,7 @@ test.each<{
     crossClassId: 6, // Bastion Warrior
     enemyDropInfo: {
       level: 97,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -238,6 +294,7 @@ test.each<{
     crossClassId: 9, // Full Metal Jaguar
     enemyDropInfo: {
       level: 97,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -254,6 +311,7 @@ test.each<{
     crossClassId: 13, // Psycorruptor
     enemyDropInfo: {
       level: 75,
+      isHeroicTale: false,
       groundArmorPoolId: 20,
       skellWeaponPoolId: 4,
       skellArmorPoolId: 1,
@@ -296,6 +354,7 @@ test.each<{
     optimalParty: true,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -314,6 +373,7 @@ test.each<{
     optimalParty: true,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -373,6 +433,7 @@ test.each<{
     optimalParty: true,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -402,6 +463,7 @@ test.each<{
     optimalParty: true,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
