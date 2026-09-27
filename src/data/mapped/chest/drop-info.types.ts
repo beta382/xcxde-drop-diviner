@@ -2,6 +2,7 @@ import type { ChestQuality } from "~/data/mapped/probabilities/chest-quality-pro
 
 export interface EnemyDropInfo {
   readonly level: number;
+  readonly isHeroicTale: boolean;
   readonly groundArmorPoolId: number;
   readonly skellWeaponPoolId: number;
   readonly skellArmorPoolId: number;

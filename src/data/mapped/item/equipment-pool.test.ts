@@ -17,6 +17,7 @@ test.each<{
     id: 308, // Ground Weapons Silver
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -125,6 +126,7 @@ test.each<{
     id: 311, // Ground Armor Gold
     enemyDropInfo: {
       level: 31,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -146,6 +148,7 @@ test.each<{
     id: 310, // Skell Weapons Silver
     enemyDropInfo: {
       level: 68,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 24,
       skellArmorPoolId: 0,
@@ -187,6 +190,7 @@ test.each<{
     classId: 4, // Duelist
     enemyDropInfo: {
       level: 65,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -199,6 +203,7 @@ test.each<{
     classId: 4, // Duelist
     enemyDropInfo: {
       level: 65,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -211,6 +216,7 @@ test.each<{
     classId: 4, // Duelist
     enemyDropInfo: {
       level: 45,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 13,
       skellArmorPoolId: 0,
@@ -223,6 +229,7 @@ test.each<{
     classId: 4, // Duelist
     enemyDropInfo: {
       level: 26,
+      isHeroicTale: false,
       groundArmorPoolId: 8,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -235,6 +242,7 @@ test.each<{
     classId: 4, // Duelist
     enemyDropInfo: {
       level: 1,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 10,
@@ -247,6 +255,7 @@ test.each<{
     classId: 1, // Drifter
     enemyDropInfo: {
       level: 15,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -259,6 +268,7 @@ test.each<{
     classId: 16, // Galactic Knight
     enemyDropInfo: {
       level: 30,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -271,6 +281,7 @@ test.each<{
     classId: 9, // Full Metal Jaguar
     enemyDropInfo: {
       level: 99,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -309,6 +320,7 @@ test.each<{
     optimalParty: false,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -322,6 +334,7 @@ test.each<{
     optimalParty: true,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -335,6 +348,7 @@ test.each<{
     optimalParty: false,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -348,6 +362,7 @@ test.each<{
     optimalParty: true,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -361,6 +376,7 @@ test.each<{
     optimalParty: false,
     enemyDropInfo: {
       level: 35,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -374,6 +390,7 @@ test.each<{
     optimalParty: false,
     enemyDropInfo: {
       level: 30,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -387,6 +404,7 @@ test.each<{
     optimalParty: false,
     enemyDropInfo: {
       level: 46,
+      isHeroicTale: false,
       groundArmorPoolId: 11,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 0,
@@ -400,6 +418,7 @@ test.each<{
     optimalParty: false,
     enemyDropInfo: {
       level: 40,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 17,
       skellArmorPoolId: 0,
@@ -413,6 +432,7 @@ test.each<{
     optimalParty: false,
     enemyDropInfo: {
       level: 1,
+      isHeroicTale: false,
       groundArmorPoolId: 0,
       skellWeaponPoolId: 0,
       skellArmorPoolId: 7,

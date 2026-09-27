@@ -20,6 +20,7 @@ test.each<{
     chestQuality: "silver",
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 4,
       skellWeaponPoolId: 14,
       skellArmorPoolId: 0,
@@ -78,6 +79,7 @@ test.each<{
     crossClassId: 4, // Duelist
     enemyDropInfo: {
       level: 99,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -95,6 +97,7 @@ test.each<{
     crossClassId: 4, // Duelist
     enemyDropInfo: {
       level: 99,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -111,6 +114,7 @@ test.each<{
     crossClassId: 4, // Duelist
     enemyDropInfo: {
       level: 99,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -124,6 +128,7 @@ test.each<{
     crossClassId: 4, // Duelist
     enemyDropInfo: {
       level: 99,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -137,6 +142,7 @@ test.each<{
     crossClassId: 4, // Duelist
     enemyDropInfo: {
       level: 99,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -150,6 +156,7 @@ test.each<{
     crossClassId: 4, // Duelist
     enemyDropInfo: {
       level: 99,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -163,6 +170,7 @@ test.each<{
     crossClassId: 4, // Duelist
     enemyDropInfo: {
       level: 99,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -211,6 +219,7 @@ test.each<{
     optimalParty: true,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -228,6 +237,7 @@ test.each<{
     optimalParty: true,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -252,6 +262,7 @@ test.each<{
     optimalParty: true,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -269,6 +280,7 @@ test.each<{
     optimalParty: true,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 1,
       skellWeaponPoolId: 1,
       skellArmorPoolId: 1,
@@ -286,6 +298,7 @@ test.each<{
     optimalParty: true,
     enemyDropInfo: {
       level: 66,
+      isHeroicTale: false,
       groundArmorPoolId: 4,
       skellWeaponPoolId: 14,
       skellArmorPoolId: 0,

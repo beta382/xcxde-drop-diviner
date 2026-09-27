@@ -126,21 +126,31 @@ function getEnemy(id: number, level: number, brokenAppendageIndexes: number[]) {
 test.each<{
   id: number;
   level: number;
+  expectedIsHeroicTale: boolean;
 }>([
   {
     id: 2526,
     level: 84,
+    expectedIsHeroicTale: false,
+  },
+  {
+    id: 2682,
+    level: 55,
+    expectedIsHeroicTale: false,
   },
   {
     id: 2682,
     level: 93,
+    expectedIsHeroicTale: true,
   },
 ])(
-  "enemyTemplates[$id].createEnemy($level, []).level equals $level",
-  ({ id, level }) => {
+  "enemyTemplates[$id].createEnemy($level, []) has level $level and " +
+    "isHeroicTale $expectedIsHeroicTale",
+  ({ id, level, expectedIsHeroicTale }) => {
     const enemy = getEnemy(id, level, []);
 
     expect(enemy.level).toBe(level);
+    expect(enemy.isHeroicTale).toBe(expectedIsHeroicTale);
   },
 );
 
@@ -320,6 +330,28 @@ test.each<{
       },
       {
         name: "Advanced Core",
+      },
+    ],
+  },
+  {
+    // Heroic Tale level: rolls a bronze chest, which is upgraded to silver
+    id: 3872,
+    seed: 4,
+    level: 69,
+    brokenAppendageIndexes: [],
+    treasureSensor: 0,
+    crossClassId: 4, // Duelist
+    expectedItems: [
+      {
+        name: "Ultra Diamond Haven II",
+        traits: ["Thermal Resistance Up XV", "Theroid Criticals Up XV"],
+        augmentSlots: 0,
+      },
+      {
+        name: "Visigel Poison Orb",
+      },
+      {
+        name: "Opaque Membrane",
       },
     ],
   },

@@ -55,6 +55,7 @@ export class DropTable {
       this.#chestQualityProbabilities.probabilityOfExactly(
         "bronze",
         treasureSensor,
+        enemyDropInfo.isHeroicTale,
       ) > 0
     ) {
       droppableItems.push(
@@ -69,6 +70,7 @@ export class DropTable {
       this.#chestQualityProbabilities.probabilityOfExactly(
         "silver",
         treasureSensor,
+        enemyDropInfo.isHeroicTale,
       ) > 0
     ) {
       droppableItems.push(
@@ -86,6 +88,7 @@ export class DropTable {
       this.#chestQualityProbabilities.probabilityOfExactly(
         "gold",
         treasureSensor,
+        enemyDropInfo.isHeroicTale,
       ) > 0
     ) {
       droppableItems.push(
@@ -107,12 +110,18 @@ export class DropTable {
    *
    * @param rng The RNG engine
    * @param treasureSensor The Treasure Sensor bonus in percentage points
+   * @param enemyDropInfo Enemy-specific drop information
    * @returns The chest quality, or null if no chest
    */
-  rollChestQuality(rng: MtRand, treasureSensor: number): ChestQuality | null {
+  rollChestQuality(
+    rng: MtRand,
+    treasureSensor: number,
+    enemyDropInfo: EnemyDropInfo,
+  ): ChestQuality | null {
     return this.#chestQualityProbabilities.rollChestQuality(
       rng,
       treasureSensor,
+      enemyDropInfo.isHeroicTale,
     );
   }
 
@@ -275,6 +284,7 @@ export class DropTable {
       this.#chestQualityProbabilities.probabilityOfExactly(
         chestQuality,
         treasureSensor,
+        enemyDropInfo.isHeroicTale,
       );
 
     const chestDropCount =
